@@ -1,6 +1,6 @@
 <?php
 require_once 'conexao.php';
-require_once '../classes/hospede.class.php';
+require_once 'hospede.class.php';
 
 
 $hospede = new Hospede($pdo);
@@ -10,9 +10,12 @@ if(!empty($_POST['email'])){
     $CPF = $_POST['CPF'];
     $email = $_POST['email'];
     $celular = $_POST['celular'];
+    $telefone = $_POST['telefone'];
     
-    if($hospede->adicionarHospede($nome_completo, $CPF, $email, $celular)){
-        echo "Hospede cadastrado";
+    if($hospede->adicionarHospede($nome_completo, $CPF, $email, $celular, $telefone)){
+        $id = $hospede->infoHospedePorEmail($email)['id'];
+        
+        header("Location: ../detalhes-hospede.php?id=$id");
     }else{
         echo "Erro ao cadastrar";
     }

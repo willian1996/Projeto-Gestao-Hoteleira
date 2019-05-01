@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Hospede</title>
-</head>
+<?php
+require_once 'header.php';
+?>
 
-<body>
-    
-    <h1>Cadatrar Hospede</h1>
+
+<div class="container">
+    <h2>Cadatrar Hospede</h2>
 
     <div class="form_cadastrar_hospede">
         <form method="post" action="server/cadastrar-hospede-submit.php">
@@ -20,10 +16,15 @@
             <input type="email" id="email" name="email" required/><br><br>
             Celular:<br>
             <input type="tel" id="celular" name="celular" required/><br><br>
-
+            Telefone:<br>
+            <input type="tel" id="telefone" name="telefone" required/><br><br>
             <input type="submit" value="Enviar"/>
         </form>
     </div>
+</div>
+
+    
+    
 
 
 
@@ -32,7 +33,6 @@
 
 
 
-
-<script src="js/script.js"></script>
-</body>
-</html>
+<?php
+require_once 'footer.php';
+?>

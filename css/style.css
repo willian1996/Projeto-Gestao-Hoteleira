@@ -1,0 +1,31 @@
+*,body{
+    margin: 0;
+    padding: 0;
+}
+section.header{
+    width: 100%;
+    height: 80px;
+    background-color: #CCC;
+}
+section.rodape{
+    width: 100%;
+    height: 200px;
+    background-color: #CCC;
+}
+div.container{
+    min-height: 600px;
+    background-color: ghostwhite;
+}
+div.container{
+    width: 90%;
+    margin: 0 auto;
+}
+
+.detalhes-hospede{
+    width: 400px;
+}
+.detalhes-hospede i{
+    float: right;
+    margin: 0 10px 5px;
+    font-size: 25px;
+}
