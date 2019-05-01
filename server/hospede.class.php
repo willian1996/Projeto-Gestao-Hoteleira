@@ -31,7 +31,7 @@ class Hospede{
     }
     
     public function listarHospedes(){
-        $sql = "SELECT * FROM hospedes";
+        $sql = "SELECT * FROM hospedes WHERE status = 1";
         $sql = $this->pdo->query($sql);
         
         if($sql->rowCount() > 0){
@@ -64,6 +64,19 @@ class Hospede{
             return $sql->fetch();
         }else{
             return array();
+        }
+    }
+    
+    public function excluirHospede($id){
+        $sql = "UPDATE hospedes SET status = '0' WHERE id = :id";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+        
+        if($sql->rowCount() > 0){
+            return true;
+        }else{
+            return false;
         }
     }
     
