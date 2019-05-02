@@ -13,35 +13,47 @@ require_once 'header.php';
 ?>
 
 <div class="container">
+    <a href="lista-hospedes.php">Voltar para lista</a>
     
-    <div class="detalhes-hospede">
-        <h2>Detalhes do Hospede</h2>
-        <a href="lista-hospedes.php">Voltar para lista</a>
-        <table border="1px" width="400">
-            <i onclick="excluirHospede(<?php echo $info['id']; ?>)" class="fas fa-trash-alt"></i>
-            <i onclick="editarHospede(<?php echo $info['id']; ?>)" class="fas fa-user-edit"></i>
+    <div class="detalhes-hospede"> 
+        <h2>Informações do Hospede</h2>
+        
+        <i id="excluirHospede" onclick="excluirHospede(<?php echo $info['id']; ?>)" class="fas fa-trash-alt"></i>
+        <i id="editarHospede" onclick="editarHospede(<?php echo $info['id']; ?>)" class="fas fa-user-edit"></i>
+        <table id="tabela-info-hospede">
             <tr>
                 <th>Nome</th>
-                <td><strong><?php echo $info['nome_completo']; ?></strong></td> 
+                <td id="tdNome"><?php echo $info['nome_completo']; ?></td> 
             </tr>
             <tr>
                 <th>CPF</th>
-                <td><?php echo $info['CPF']; ?></td> 
+                <td id="tdCPF"><?php echo $info['CPF']; ?></td> 
             </tr>
             <tr>
                 <th>Email</th>
-                <td><?php echo $info['email']; ?></td> 
+                <td id="tdEmail"><?php echo $info['email']; ?></td> 
             </tr>
             <tr>
                 <th>Telefone</th>
-                <td><?php echo $info['telefone']; ?></td> 
+                <td id="tdTelefone"><?php echo $info['telefone']; ?></td> 
             </tr>
             <tr>
                 <th>Celular</th>
-                <td><?php echo $info['celular']; ?></td> 
+                <td id="tdCelular"><?php echo $info['celular']; ?></td> 
             </tr>
         </table><!--info-hospede-->
     </div><!--tabela-detalhes-hospede-->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 </div><!--container-->
 
 

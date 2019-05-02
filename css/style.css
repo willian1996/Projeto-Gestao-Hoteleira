@@ -15,6 +15,7 @@ section.rodape{
 div.container{
     min-height: 600px;
     background-color: ghostwhite;
+    padding-bottom: 20px;
 }
 div.container{
     width: 90%;
@@ -22,10 +23,65 @@ div.container{
 }
 
 .detalhes-hospede{
-    width: 400px;
+    width: 50%;
+    padding-top: 20px;
+    
+}
+.lista-hospedes{
+    padding-top: 20px;
 }
 .detalhes-hospede i{
     float: right;
     margin: 0 10px 5px;
     font-size: 25px;
 }
+.BotaoSalvarEdit{
+    color: #fff;
+    background-color: #ccc;
+    float: right;
+    margin: 0 10px 5px;
+    font-size: 25px;
+}
+.detalhes-hospede h2{
+    margin-bottom: 15px;
+}
+.lista-hospedes table, .detalhes-hospede table{
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+.lista-hospedes table td, th, .detalhes-hospede table td{
+    border: 1px solid #000;
+    text-align: left;
+    padding: 5px;
+
+}
+.lista-hospedes table td, .detalhes-hospede table td{
+    height: 30px;
+}
+.lista-hospedes table tr:nth-child(even), .detalhes-hospede table tr:nth-child(even){
+    background-color: #ddd;
+}
+
+@media screen and (max-width: 800px){
+    .lista-hospedes table .lastCol{
+        display: none;
+    }
+    .lista-hospedes table td, th, .detalhes-hospede table td{
+        padding: 8px;
+        font-size: 15px;
+    }
+    .detalhes-hospede{
+        width: 100%;
+        
+    }
+    .lista-hospedes h2, .detalhes-hospede h2{
+        text-align: center;
+    }
+    .lista-hospedes h2, .detalhes-hospede h2{
+        margin-bottom: 20px;
+        font-size: 30px;
+    }
+    
+}
+

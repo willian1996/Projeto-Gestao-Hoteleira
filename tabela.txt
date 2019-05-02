@@ -1,0 +1,25 @@
+<div class="detalhes-hospede"> 
+        <h3>Endereço</h3>
+        <table>
+            <tr>
+                <th>Nome</th>
+                <td><?php echo $info['nome_completo']; ?></td> 
+            </tr>
+            <tr>
+                <th>CPF</th>
+                <td><?php echo $info['CPF']; ?></td> 
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><?php echo $info['email']; ?></td> 
+            </tr>
+            <tr>
+                <th>Telefone</th>
+                <td><?php echo $info['telefone']; ?></td> 
+            </tr>
+            <tr>
+                <th>Celular</th>
+                <td><?php echo $info['celular']; ?></td> 
+            </tr>
+        </table><!--info-hospede-->
+    </div><!--tabela-detalhes-hospede-->

@@ -10,12 +10,12 @@ if(!empty($_GET['id'])){
     $id = intval($_GET['id']);
     if($hospede->excluirHospede($id)){
         $retorno['deucerto'] = true;
-        $retorno['mensagem'] = "Parabens! excluiu!";
+        $retorno['mensagem'] = "Hospede excluído!";
         echo json_encode($retorno);
         
     }else{
         $retorno['deucerto'] = false;
-        $retorno['mensagem'] = "Erro ao excluir!";
+        $retorno['mensagem'] = "Erro no servidor!";
         echo json_encode($retorno);
     }
     
