@@ -81,7 +81,7 @@ class Hospede{
     }
     
     public function editarHospede($id, $nome_completo, $CPF, $email, $celular, $telefone){
-        if(!$this->existeEmail($email) and !$this->existeCPF($CPF)){
+        if(!$this->existeEmail($email, $id) and !$this->existeCPF($CPF, $id)){
             $sql = "UPDATE hospedes SET nome_completo = :nome_completo, CPF = :CPF, email = :email, celular = :celular, telefone = :telefone WHERE id = :id";
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(":id", $id);
@@ -97,6 +97,8 @@ class Hospede{
             }else{
                 return false;
             }
+        }else{
+            return false;
         }
     }
     
@@ -116,12 +118,18 @@ class Hospede{
     
     
     
-    public function existeEmail($email){
-        $sql = "SELECT * FROM hospedes WHERE email = :email";
-        $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(":email", $email);
+    public function existeEmail($email, $id=''){
+        if($id == ''){
+            $sql = "SELECT * FROM hospedes WHERE email = :email";
+            $sql = $this->pdo->prepare($sql);
+            $sql->bindValue(":email", $email);
+        }else{
+            $sql = "SELECT * FROM hospedes WHERE email = :email and id != :id";
+            $sql = $this->pdo->prepare($sql);
+            $sql->bindValue(":email", $email);
+            $sql->bindValue(":id", $id);
+        }
         $sql->execute();
-        
         if($sql->rowCount() > 0){
             return true;
         }else{
@@ -129,12 +137,18 @@ class Hospede{
         }
     }
     
-    public function existeCPF($CPF){
-        $sql = "SELECT * FROM hospedes WHERE CPF = :CPF";
-        $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(":CPF", $CPF);
-        $sql->execute();
-        
+    public function existeCPF($CPF, $id=''){
+        if($id == ''){
+            $sql = "SELECT * FROM hospedes WHERE CPF = :CPF";
+            $sql = $this->pdo->prepare($sql);
+            $sql->bindValue(":CPF", $CPF);
+        }else{
+            $sql = "SELECT * FROM hospedes WHERE CPF = :CPF and id = != :id";
+            $sql = $this->pdo->prepare($sql);
+            $sql->bindValue(":CPF", $CPF);
+            $sql->bindValue(":id", $id);
+        }
+        $sql->execute();  
         if($sql->rowCount() > 0){
             return true;
         }else{

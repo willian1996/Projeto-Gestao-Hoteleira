@@ -44,7 +44,6 @@ function editarHospede(id){
         var novoCelular = tdValor[4].value;
         
         var resposta = confirm("Deseja salvar alterações?");
-        
         if(resposta == true){
             if(window.XMLHttpRequest){
                 var ajax = new XMLHttpRequest();
