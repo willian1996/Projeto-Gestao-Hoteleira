@@ -1,3 +1,4 @@
+//Esta função edita as informações do hospede da tabela detalhes do hospede
 function editarHospede(id){
     //seleciondo os td da tabela detalhes-hospede
     var objNome = document.getElementById('tdNome');
@@ -20,7 +21,7 @@ function editarHospede(id){
     var tdTelefone = objTelefone.innerHTML = '<input class="input-td" type="text" name="telefone" value="'+telefone+'">';
     var tdCelular = objCelular.innerHTML = '<input class="input-td" type="text" name="celular" value="'+celular+'">';
     
-    //escondendo os botoes editar e excluir da tabela 
+    //escondendo os botoes editar e excluir da tabela
     document.getElementById('editarHospede').style.display = 'none';
     document.getElementById('excluirHospede').style.display = 'none';
     
@@ -32,6 +33,20 @@ function editarHospede(id){
     botao.setAttributeNode(atributoClass);
     var tabela = document.getElementsByClassName('detalhes-hospede')[0];
     tabela.insertBefore(botao, tabela.childNodes[0]);
+    
+    //criando botao cancelar 
+    var botaoCancelar = document.createElement('button');
+    botaoCancelar.innerHTML = 'Cancel';
+    var atributoClass = document.createAttribute("class");       // Create a "class" attribute
+    atributoClass.value = "BotaoSalvarEdit";                           // Set the value of the class attribute
+    botaoCancelar.setAttributeNode(atributoClass);
+    var tabela = document.getElementsByClassName('detalhes-hospede')[0];
+    tabela.insertBefore(botaoCancelar, tabela.childNodes[0]);
+    
+    //carregando a pagina após clicar em cancelar
+    botaoCancelar.onclick = function(){
+        location.reload();
+    }
     
     //salvando alterações
     botao.onclick = function(){
@@ -69,11 +84,12 @@ function editarHospede(id){
             location.reload();
         }
 
-    
     }
 
 }
 
+
+//Esta função desativa o hospede para não ser mostrado mais na lista de hospedes 
 function excluirHospede(id){
     var resposta = confirm("Deseja excluir este hospede?");
     if(resposta == true){

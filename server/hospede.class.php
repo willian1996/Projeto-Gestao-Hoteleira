@@ -69,7 +69,24 @@ class Hospede{
     
     
     public function editarHospede($id, $nome_completo, $CPF, $email, $celular, $telefone){
-        if(!$this->existeEmail($email, $id) and !$this->existeCPF($CPF, $id)){
+        
+        if($nome_completo == '' or $CPF == '' or $email == '' or $celular == '' or $telefone == ''){
+            $retorno['deucerto'] = false;
+            $retorno['mensagem'] = "Erro! os campos não podem estar vazio!";
+            return $retorno;
+        }
+        
+        if($this->existeEmail($email, $id)){
+            $retorno['deucerto'] = false;
+            $retorno['mensagem'] = "Erro! E-mail já está em uso em outro registro!";
+            return $retorno;
+        }
+        if($this->existeCPF($CPF, $id)){
+            $retorno['deucerto'] = false;
+            $retorno['mensagem'] = "Erro! CPF já está em uso em outro registro!";
+            return $retorno;
+        }
+        try{
             $sql = "UPDATE hospedes SET nome_completo = :nome_completo, CPF = :CPF, email = :email, celular = :celular, telefone = :telefone WHERE id = :id";
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(":id", $id);
@@ -81,13 +98,20 @@ class Hospede{
             $sql->execute();
             
             if($sql->rowCount() > 0){
-                return true;
+                $retorno['deucerto'] = true;
+                $retorno['mensagem'] = "hospede editado com sucesso!";
+                return $retorno;
             }else{
-                return false;
+                $retorno['deucerto'] = false;
+                $retorno['mensagem'] = "Não Alterado";
+                return $retorno;
             }
-        }else{
-            return false;
+        }catch(PDOException $e){
+            $retorno['deucerto'] = false;
+            $retorno['mensagem'] = "Erro ".$e->getMessage();
+            return $retorno;
         }
+            
     }
     
     public function excluirHospede($id){
@@ -97,9 +121,13 @@ class Hospede{
         $sql->execute();
         
         if($sql->rowCount() > 0){
-            return true;
+            $retorno['deucerto'] = true;
+            $retorno['mensagem'] = "Hospede excluído!";
+            return $retorno;
         }else{
-            return false;
+            $retorno['deucerto'] = false;
+            $retorno['mensagem'] = "Erro no servidor!";
+            return $retorno;
         }
     }
     
@@ -144,7 +172,7 @@ class Hospede{
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(":CPF", $CPF);
         }else{
-            $sql = "SELECT * FROM hospedes WHERE CPF = :CPF and id = != :id";
+            $sql = "SELECT * FROM hospedes WHERE CPF = :CPF and id != :id";
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(":CPF", $CPF);
             $sql->bindValue(":id", $id);

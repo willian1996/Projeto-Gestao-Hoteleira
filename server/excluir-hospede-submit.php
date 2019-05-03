@@ -2,26 +2,23 @@
 if(empty($_GET['id'])){
     header("Location: ../index.php");
 }
-
+//puxando os arquivos conexao e classe hospede
 require_once 'conexao.php';
 require_once 'hospede.class.php';
 
-
+//estanciando o obj hospede 
 $hospede = new Hospede($pdo);
 
 
-
+//pegando o id do ajax
 $id = intval($_GET['id']);
-if($hospede->excluirHospede($id)){
-    $retorno['deucerto'] = true;
-    $retorno['mensagem'] = "Hospede excluído!";
-    echo json_encode($retorno);
 
-}else{
-    $retorno['deucerto'] = false;
-    $retorno['mensagem'] = "Erro no servidor!";
-    echo json_encode($retorno);
-}
+//chamando o metoto para excluir
+$retorno = $hospede->excluirHospede($id);
+
+//devolvendo resposta para o ajax 
+echo json_encode($retorno);
+
 
     
     

@@ -34,13 +34,17 @@ div.container{
     float: right;
     margin: 0 10px 5px;
     font-size: 25px;
+    cursor: pointer;
 }
 .BotaoSalvarEdit{
     color: #fff;
     background-color: #ccc;
     float: right;
     margin: 0 10px 5px;
-    font-size: 25px;
+    font-size: 15px;
+    padding: 5px;
+    width: 60px;
+    cursor: pointer;
 }
 .input-td{
     width:100%;
