@@ -1,41 +1,78 @@
 function editarHospede(id){
+    //seleciondo os td da tabela detalhes-hospede
+    var objNome = document.getElementById('tdNome');
+    var objCPF = document.getElementById('tdCPF');
+    var objEmail = document.getElementById('tdEmail');
+    var objTelefone = document.getElementById('tdTelefone');
+    var objCelular = document.getElementById('tdCelular');
     
-    //pegando os valores hospede na tabela 
-    var nome = document.getElementById('tdNome').innerHTML;
-    var CPF = document.getElementById('tdCPF').innerHTML;
-    var email = document.getElementById('tdEmail').innerHTML;
-    var telefone = document.getElementById('tdTelefone').innerHTML;
-    var celular = document.getElementById('tdCelular').innerHTML;
+    //pegando os valores hospede na tabela detalhes-hospede
+    var nome = objNome.innerHTML;
+    var CPF = objCPF.innerHTML;
+    var email = objEmail.innerHTML;
+    var telefone = objTelefone.innerHTML;
+    var celular = objCelular.innerHTML;
     
     //deixando a tabela editavel 
+    var tdNome = objNome.innerHTML = '<input class="input-td" type="text" name="nome_completo" value="'+nome+'">';
+    var tdCPF = objCPF.innerHTML = '<input class="input-td" type="text" name="CPF" value="'+CPF+'">';
+    var tdEmail = objEmail.innerHTML = '<input class="input-td" type="email" name="email" value="'+email+'">';
+    var tdTelefone = objTelefone.innerHTML = '<input class="input-td" type="text" name="telefone" value="'+telefone+'">';
+    var tdCelular = objCelular.innerHTML = '<input class="input-td" type="text" name="celular" value="'+celular+'">';
     
-    var tdNome = document.getElementById('tdNome').innerHTML = '<input style="width:100%;height:100%;" type="text" name="nome_completo" value="'+nome+'">';
-    var tdCPF = document.getElementById('tdCPF').innerHTML = '<input style="width:100%;height:100%;" type="text" name="CPF" value="'+CPF+'">';
-    var tdEmail = document.getElementById('tdEmail').innerHTML = '<input style="width:100%;height:100%;" type="text" name="email" value="'+email+'">';
-    var tdTelefone = document.getElementById('tdTelefone').innerHTML = '<input style="width:100%;height:100%;" type="text" name="telefone" value="'+telefone+'">';
-    var tdCelular = document.getElementById('tdCelular').innerHTML = '<input style="width:100%;height:100%;" type="text" name="celular" value="'+celular+'">';
-    
+    //escondendo os botoes editar e excluir da tabela 
     document.getElementById('editarHospede').style.display = 'none';
     document.getElementById('excluirHospede').style.display = 'none';
     
+    //criando o botao salvar
     var botao = document.createElement('button');
     botao.innerHTML = 'Salvar';
-    var atributo = document.createAttribute("class");       // Create a "class" attribute
-    atributo.value = "BotaoSalvarEdit";                           // Set the value of the class attribute
-    botao.setAttributeNode(atributo);
+    var atributoClass = document.createAttribute("class");       // Create a "class" attribute
+    atributoClass.value = "BotaoSalvarEdit";                           // Set the value of the class attribute
+    botao.setAttributeNode(atributoClass);
     var tabela = document.getElementsByClassName('detalhes-hospede')[0];
-    
     tabela.insertBefore(botao, tabela.childNodes[0]);
     
+    //salvando alterações
+    botao.onclick = function(){
+        var tdValor = document.getElementsByClassName('input-td');
+        
+        var novoNome = tdValor[0].value;
+        var novoCPF = tdValor[1].value;
+        var novoEmail = tdValor[2].value;
+        var novoTelefone = tdValor[3].value;
+        var novoCelular = tdValor[4].value;
+        
+        var resposta = confirm("Deseja salvar alterações?");
+        
+        if(resposta == true){
+            if(window.XMLHttpRequest){
+                var ajax = new XMLHttpRequest();
+            }else{
+                var ajax = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            ajax.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    var resposta = JSON.parse(this.response);
+                    if(resposta.deucerto){
+                        alert(resposta.mensagem);
+                        location.reload();
+                    }else{
+                        alert(resposta.mensagem);
+                    }
+                }
+            };
+            ajax.open('GET', 'server/editar-hospede.php?id='+id+'&nome='+novoNome+'&cpf='+novoCPF+'&email='+novoEmail+'&telefone='+novoTelefone+'&celular='+novoCelular, true);
+            ajax.send();
+            
+        }else{
+            alert('Alterações cancelada');
+            location.reload();
+        }
+
     
-    
-    
-    
-    
-    
-    
-    
-    
+    }
+
 }
 
 function excluirHospede(id){

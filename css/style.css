@@ -42,6 +42,10 @@ div.container{
     margin: 0 10px 5px;
     font-size: 25px;
 }
+.input-td{
+    width:100%;
+    height:100%;
+}
 .detalhes-hospede h2{
     margin-bottom: 15px;
 }

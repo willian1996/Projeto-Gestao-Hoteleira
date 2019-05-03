@@ -80,6 +80,27 @@ class Hospede{
         }
     }
     
+    public function editarHospede($id, $nome_completo, $CPF, $email, $celular, $telefone){
+        if(!$this->existeEmail($email) and !$this->existeCPF($CPF)){
+            $sql = "UPDATE hospedes SET nome_completo = :nome_completo, CPF = :CPF, email = :email, celular = :celular, telefone = :telefone WHERE id = :id";
+            $sql = $this->pdo->prepare($sql);
+            $sql->bindValue(":id", $id);
+            $sql->bindValue(":nome_completo", $nome_completo);
+            $sql->bindValue(":CPF", $CPF);
+            $sql->bindValue(":email", $email);
+            $sql->bindValue(":celular", $celular);
+            $sql->bindValue(":telefone", $telefone);
+            $sql->execute();
+            
+            if($sql->rowCount() > 0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+    
+    
     
     
     
