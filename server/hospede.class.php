@@ -67,18 +67,6 @@ class Hospede{
         }
     }
     
-    public function excluirHospede($id){
-        $sql = "UPDATE hospedes SET status = '0' WHERE id = :id";
-        $sql = $this->pdo->prepare($sql);
-        $sql->bindValue(":id", $id);
-        $sql->execute();
-        
-        if($sql->rowCount() > 0){
-            return true;
-        }else{
-            return false;
-        }
-    }
     
     public function editarHospede($id, $nome_completo, $CPF, $email, $celular, $telefone){
         if(!$this->existeEmail($email, $id) and !$this->existeCPF($CPF, $id)){
@@ -102,6 +90,18 @@ class Hospede{
         }
     }
     
+    public function excluirHospede($id){
+        $sql = "UPDATE hospedes SET status = '0' WHERE id = :id";
+        $sql = $this->pdo->prepare($sql);
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+        
+        if($sql->rowCount() > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
     
     
     
@@ -118,7 +118,8 @@ class Hospede{
     
     
     
-    public function existeEmail($email, $id=''){
+    
+    private function existeEmail($email, $id=''){
         if($id == ''){
             $sql = "SELECT * FROM hospedes WHERE email = :email";
             $sql = $this->pdo->prepare($sql);
@@ -137,7 +138,7 @@ class Hospede{
         }
     }
     
-    public function existeCPF($CPF, $id=''){
+    private function existeCPF($CPF, $id=''){
         if($id == ''){
             $sql = "SELECT * FROM hospedes WHERE CPF = :CPF";
             $sql = $this->pdo->prepare($sql);
@@ -154,6 +155,13 @@ class Hospede{
         }else{
             return false;
         }
+    }
+    
+    private function filtraEntrada($campo){
+        $campo = trim($campo); // remove espaços no início e no final
+        $campo = strip_tags($campo); // remove tags html
+        $campo = addslashes($campo); // adiciona caractere de escape nas aspas e apostófros
+        return $campo;
     }
     
     
