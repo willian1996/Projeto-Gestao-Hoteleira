@@ -1,5 +1,5 @@
 <?php
-if(empty($_GET['id'])){
+if(empty($_POST['id'])){
     header("Location: ../index.php");
 }
 //puxando os arquivos conexao e classe hospede
@@ -11,7 +11,7 @@ $hospede = new Hospede($pdo);
 
 
 //pegando o id do ajax
-$id = intval($_GET['id']);
+$id = intval($_POST['id']);
 
 //chamando o metoto para excluir
 $retorno = $hospede->excluirHospede($id);

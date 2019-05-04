@@ -8,6 +8,12 @@ class Hospede{
     }
     
     public function adicionarHospede($nome_completo, $CPF, $email, $celular, $telefone){
+        //aplicando segurança nas entradas 
+        $nome_completo = $this->filtraEntrada($nome_completo);
+        $CPF = $this->filtraEntrada($CPF);
+        $email = $this->filtraEntrada($email);
+        $celular = $this->filtraEntrada($celular);
+        $telefone = $this->filtraEntrada($telefone);
         
         if(!$this->existeEmail($email) and !$this->existeCPF($CPF)){
             $sql = "INSERT INTO hospedes (nome_completo, CPF, email, celular, telefone) VALUES (:nome_completo, :CPF, :email, :celular, :telefone)";
@@ -69,18 +75,28 @@ class Hospede{
     
     
     public function editarHospede($id, $nome_completo, $CPF, $email, $celular, $telefone){
+        //aplicando segurança nas entradas
+        $id = $this->filtraEntrada($id);
+        $nome_completo = $this->filtraEntrada($nome_completo);
+        $CPF = $this->filtraEntrada($CPF);
+        $email = $this->filtraEntrada($email);
+        $celular = $this->filtraEntrada($celular);
+        $telefone = $this->filtraEntrada($telefone);
         
+        
+        //verificando se alguns dos campos estão vazios 
         if($nome_completo == '' or $CPF == '' or $email == '' or $celular == '' or $telefone == ''){
             $retorno['deucerto'] = false;
             $retorno['mensagem'] = "Erro! os campos não podem estar vazio!";
             return $retorno;
         }
-        
+        //verificando se o email já esta cadastrado 
         if($this->existeEmail($email, $id)){
             $retorno['deucerto'] = false;
             $retorno['mensagem'] = "Erro! E-mail já está em uso em outro registro!";
             return $retorno;
         }
+        //verificando se o cpf ja esta cadastrado 
         if($this->existeCPF($CPF, $id)){
             $retorno['deucerto'] = false;
             $retorno['mensagem'] = "Erro! CPF já está em uso em outro registro!";
@@ -108,7 +124,7 @@ class Hospede{
             }
         }catch(PDOException $e){
             $retorno['deucerto'] = false;
-            $retorno['mensagem'] = "Erro ".$e->getMessage();
+            $retorno['mensagem'] = "Erro no servidor";
             return $retorno;
         }
             

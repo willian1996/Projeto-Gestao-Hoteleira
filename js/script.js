@@ -1,3 +1,11 @@
+
+function criarHospede(){
+    
+}
+
+
+
+
 //Esta função edita as informações do hospede da tabela detalhes do hospede
 function editarHospede(id){
     //seleciondo os td da tabela detalhes-hospede
@@ -22,34 +30,36 @@ function editarHospede(id){
     var tdCelular = objCelular.innerHTML = '<input class="input-td" type="text" name="celular" value="'+celular+'">';
     
     //escondendo os botoes editar e excluir da tabela
-    document.getElementById('editarHospede').style.display = 'none';
-    document.getElementById('excluirHospede').style.display = 'none';
+    var botaoEditar = document.getElementById('editarHospede').style.display = 'none';
+    var botaoExcluir = document.getElementById('excluirHospede').style.display = 'none';
     
     //criando o botao salvar
-    var botao = document.createElement('button');
-    botao.innerHTML = 'Salvar';
-    var atributoClass = document.createAttribute("class");       // Create a "class" attribute
-    atributoClass.value = "BotaoSalvarEdit";                           // Set the value of the class attribute
-    botao.setAttributeNode(atributoClass);
+    var botaoSalvar = document.createElement('button');
+    botaoSalvar.innerHTML = 'Salvar';
+    var atributoClass = document.createAttribute("class");       
+    atributoClass.value = "BotaoSalvarEdit";                          
+    botaoSalvar .setAttributeNode(atributoClass);
     var tabela = document.getElementsByClassName('detalhes-hospede')[0];
-    tabela.insertBefore(botao, tabela.childNodes[0]);
+    tabela.insertBefore(botaoSalvar , tabela.childNodes[2]);
     
     //criando botao cancelar 
     var botaoCancelar = document.createElement('button');
     botaoCancelar.innerHTML = 'Cancel';
-    var atributoClass = document.createAttribute("class");       // Create a "class" attribute
-    atributoClass.value = "BotaoSalvarEdit";                           // Set the value of the class attribute
+    var atributoClass = document.createAttribute("class");       
+    atributoClass.value = "BotaoSalvarEdit";                           
     botaoCancelar.setAttributeNode(atributoClass);
     var tabela = document.getElementsByClassName('detalhes-hospede')[0];
-    tabela.insertBefore(botaoCancelar, tabela.childNodes[0]);
+    tabela.insertBefore(botaoCancelar, tabela.childNodes[2]);
     
     //carregando a pagina após clicar em cancelar
     botaoCancelar.onclick = function(){
         location.reload();
+        
+        
     }
     
     //salvando alterações
-    botao.onclick = function(){
+    botaoSalvar.onclick = function(){
         var tdValor = document.getElementsByClassName('input-td');
         
         var novoNome = tdValor[0].value;
@@ -65,6 +75,8 @@ function editarHospede(id){
             }else{
                 var ajax = new ActiveXObject("Microsoft.XMLHTTP");
             }
+            ajax.open('POST', 'server/editar-hospede.php', true);
+            ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             ajax.onreadystatechange = function(){
                 if(this.readyState == 4 && this.status == 200){
                     var resposta = JSON.parse(this.response);
@@ -76,8 +88,8 @@ function editarHospede(id){
                     }
                 }
             };
-            ajax.open('GET', 'server/editar-hospede.php?id='+id+'&nome='+novoNome+'&cpf='+novoCPF+'&email='+novoEmail+'&telefone='+novoTelefone+'&celular='+novoCelular, true);
-            ajax.send();
+            
+            ajax.send('id='+id+'&nome='+novoNome+'&cpf='+novoCPF+'&email='+novoEmail+'&telefone='+novoTelefone+'&celular='+novoCelular);
             
         }else{
             alert('Alterações cancelada');
@@ -98,6 +110,8 @@ function excluirHospede(id){
             }else{
                 var ajax = new ActiveXObject("Microsoft.XMLHTTP");
         }
+        ajax.open('POST', 'server/excluir-hospede-submit.php', true);
+        ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         ajax.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
                 var resposta = JSON.parse(this.response);
@@ -109,8 +123,7 @@ function excluirHospede(id){
                 }
             }
         };
-        ajax.open('GET', 'server/excluir-hospede-submit.php?id='+id, true);
-        ajax.send();
+        ajax.send('id='+id);
     }else{
         alert('Exclusão cancelada');
     }
