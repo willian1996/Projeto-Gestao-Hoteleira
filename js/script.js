@@ -1,31 +1,78 @@
 const urlHostServ = 'http://localhost/Projeto-Gestao-Hoteleira/lista-hospedes.php';
 
+//selecinando os td da tabela detalhes-hospede
+const objNomeTd = document.getElementById('tdNome');
+const objCPFTd = document.getElementById('tdCPF');
+const objEmailTd = document.getElementById('tdEmail');
+const objTelefoneTd = document.getElementById('tdTelefone');
+const objCelularTd = document.getElementById('tdCelular');
+
+//selecionando os input do formulario form_cadastrar_hospede
+const objfnome = document.getElementById('fnome_completo');
+const objfCPF = document.getElementById('fCPF');
+const objfemail = document.getElementById('femail');
+const objfcelular = document.getElementById('fcelular');
+const objftelefone = document.getElementById('ftelefone');
+const botaoCadastrar = document.getElementById('botaoCadastrar');
+
+//validando input nome 
+function validarNome(){
+    if(objfnome.value == ''){
+        objfnome.style.backgroundColor = '#f00';
+        botaoCadastrar.disabled = true;
+        alert('o campo nome não pode estar vazio');
+    }else if(objfnome.value.length < 10){
+        objfnome.style.backgroundColor = '#f00';
+        botaoCadastrar.disabled = true;
+        alert('Digite seu nome completo');
+    }else{
+        botaoCadastrar.disabled = false;
+    }
+}
+
+//validando input CPF
+function validarCPF(){
+    if(objfCPF.value == ''){
+        alert('o campo CPF não pode estar vazio');
+        botaoCadastrar.disabled = true;
+    }else if(objfCPF.value != 11){
+        alert('CPF inválido');
+        botaoCadastrar.disabled = true;
+    }
+}
+
+
 
 function criarHospede(){
+    const fnome = objfnome.value;
+    const fCPF = objfCPF.value;
+    const femail = objfemail.value;
+    const fcelular = objfcelular.value;
+    const ftelefone = objftelefone.value;
     
+    console.log(fnome);
+    console.log(fCPF);
+    console.log(femail);
+    console.log(fcelular);
+    console.log(ftelefone); 
 }
+
+
 //Esta função edita as informações do hospede da tabela detalhes do hospede
 function editarHospede(id){
-    //seleciondo os td da tabela detalhes-hospede
-    const objNome = document.getElementById('tdNome');
-    const objCPF = document.getElementById('tdCPF');
-    const objEmail = document.getElementById('tdEmail');
-    const objTelefone = document.getElementById('tdTelefone');
-    const objCelular = document.getElementById('tdCelular');
-    
     //pegando os valores hospede na tabela detalhes-hospede
-    const nome = objNome.innerHTML;
-    const CPF = objCPF.innerHTML;
-    const email = objEmail.innerHTML;
-    const telefone = objTelefone.innerHTML;
-    const celular = objCelular.innerHTML;
+    const nome = objNomeTd.innerHTML;
+    const CPF = objCPFTd.innerHTML;
+    const email = objEmailTd.innerHTML;
+    const telefone = objTelefoneTd.innerHTML;
+    const celular = objCelularTd.innerHTML;
     
     //deixando a tabela editavel 
-    const tdNome = objNome.innerHTML = '<input class="input-td" type="text" name="nome_completo" value="'+nome+'">';
-    const tdCPF = objCPF.innerHTML = '<input class="input-td" type="text" name="CPF" value="'+CPF+'">';
-    const tdEmail = objEmail.innerHTML = '<input class="input-td" type="email" name="email" value="'+email+'">';
-    const tdTelefone = objTelefone.innerHTML = '<input class="input-td" type="text" name="telefone" value="'+telefone+'">';
-    const tdCelular = objCelular.innerHTML = '<input class="input-td" type="text" name="celular" value="'+celular+'">';
+    const tdNome = objNomeTd.innerHTML = '<input class="input-td" type="text" name="nome_completo" value="'+nome+'">';
+    const tdCPF = objCPFTd.innerHTML = '<input class="input-td" type="text" name="CPF" value="'+CPF+'">';
+    const tdEmail = objEmailTd.innerHTML = '<input class="input-td" type="email" name="email" value="'+email+'">';
+    const tdTelefone = objTelefoneTd.innerHTML = '<input class="input-td" type="text" name="telefone" value="'+telefone+'">';
+    const tdCelular = objCelularTd.innerHTML = '<input class="input-td" type="text" name="celular" value="'+celular+'">';
     
     //escondendo os botoes editar e excluir da tabela
     const botaoEditar = document.getElementById('editarHospede').style.display = 'none';
@@ -55,13 +102,13 @@ function editarHospede(id){
     }
     //salvando alterações
     botaoSalvar.onclick = function(){
-        var tdValor = document.getElementsByClassName('input-td');
-        var novoNome = tdValor[0].value;
-        var novoCPF = tdValor[1].value;
-        var novoEmail = tdValor[2].value;
-        var novoTelefone = tdValor[3].value;
-        var novoCelular = tdValor[4].value;
-        var resposta = confirm("Deseja salvar alterações?");
+        const tdValor = document.getElementsByClassName('input-td');
+        const novoNome = tdValor[0].value;
+        const novoCPF = tdValor[1].value;
+        const novoEmail = tdValor[2].value;
+        const novoTelefone = tdValor[3].value;
+        const novoCelular = tdValor[4].value;
+        const resposta = confirm("Deseja salvar alterações?");
         if(resposta == true){
             if(window.XMLHttpRequest){
                 var ajax = new XMLHttpRequest();
