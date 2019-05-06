@@ -13,7 +13,7 @@ $hospede = new Hospede($pdo);
 //pegando o id do ajax
 $id = intval($_POST['id']);
 
-//chamando o metoto para excluir
+//chamando o metodo para excluir
 $retorno = $hospede->excluirHospede($id);
 
 //devolvendo resposta para o ajax 

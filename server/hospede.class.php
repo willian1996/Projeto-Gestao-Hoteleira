@@ -182,7 +182,7 @@ class Hospede{
         }
     }
     
-    private function existeCPF($CPF, $id=''){
+    public function existeCPF($CPF, $id=''){
         if($id == ''){
             $sql = "SELECT * FROM hospedes WHERE CPF = :CPF";
             $sql = $this->pdo->prepare($sql);
