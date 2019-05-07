@@ -4,9 +4,9 @@ require_once 'header.php';
 
 
 <div class="container">
-    <h2>Cadatrar Hospede</h2>
-
+    <a href="lista-hospedes.php">Voltar para lista</a>
     <div class="form_cadastrar_hospede">
+        <h2>Cadastrar Hospede</h2>
         Nome Completo:<br>
         <input onfocusout="validarNome()" type="text" id="fnome_completo" name="nome_completo" required/><span id="spannome"></span>
         <br><br>
@@ -17,10 +17,10 @@ require_once 'header.php';
         <input onfocusout="validarEmail()" type="email" id="femail" name="email" required/><span id="spanemail"></span>
         <br><br>
         Celular:<br>
-        <input type="tel" id="fcelular" name="celular" required/><span id="spancelular"></span>
+        <input onfocusout="validarCelular()" type="tel" id="fcelular" name="celular" required/><span id="spancelular"></span>
         <br><br>
         Telefone:<br>
-        <input type="tel" id="ftelefone" name="telefone" required/><span id="spantelefone"></span>
+        <input onfocusout="validarTelefone()" type="tel" id="ftelefone" name="telefone" required/><span id="spantelefone"></span>
         <br><br>
         <button id="botaoCadastrar" onclick="criarHospede()">Cadastrar</button>
     </div>

@@ -27,11 +27,11 @@ function validarNome(){
     if(objfnome.value == ''){
         objfnome.style.borderColor = '#f00';
         botaoCadastrar.disabled = true;
-        spanfNome.innerHTML = ' O campo nome não pode estar vazio';
+        spanfNome.innerHTML = ' O campo Nome não pode estar vazio';
     }else if(objfnome.value.length < 10){
         objfnome.style.borderColor = '#f00';
         botaoCadastrar.disabled = true;
-        spanfNome.innerHTML = ' Digite seu nome completo';
+        spanfNome.innerHTML = ' Digite seu Nome completo';
     }else{
         botaoCadastrar.disabled = false;
         objfnome.style.borderColor = '#F8F8FF';
@@ -139,12 +139,56 @@ function validarEmail(){
     }
 }
 
+//validando celular 
+function validarCelular(){
+    if(objfcelular.value == ''){
+        objfcelular.style.borderColor = '#f00';
+        spanfCelular.innerHTML = ' O campo Celular não pode estar vazio';
+        botaoCadastrar.disabled = true;
+    }else if(objfcelular.value.length != 11){
+        objfcelular.style.borderColor = '#f00';
+        spanfCelular.innerHTML = ' Preencha o campo celular corretamente com o DDD';
+        botaoCadastrar.disabled = true;
+    }else{
+        objfcelular.style.borderColor = '#F8F8FF';
+        spanfCelular.innerHTML = '';
+        botaoCadastrar.disabled = false;
+    }
+    
+}
+//validando celular 
+function validarTelefone(){
+    if(objftelefone.value == ''){
+        objftelefone.style.borderColor = '#f00';
+        spanfTelefone.innerHTML = ' O campo Telefone não pode estar vazio';
+        botaoCadastrar.disabled = true;
+    }else if(objftelefone.value.length != 10){
+        objftelefone.style.borderColor = '#f00';
+        spanfTelefone.innerHTML = ' Preencha o campo Telefone corretamente com o DDD';
+        botaoCadastrar.disabled = true;
+    }else{
+        objftelefone.style.borderColor = '#F8F8FF';
+        spanfTelefone.innerHTML = '';
+        botaoCadastrar.disabled = false;
+    }
+}
+
+//criando cadastro de hospede
 function criarHospede(){
     const fnome = objfnome.value;
     const fCPF = objfCPF.value;
     const femail = objfemail.value;
     const fcelular = objfcelular.value;
     const ftelefone = objftelefone.value;
+    
+    if(fnome == '' || fCPF == '' || femail == '' || fcelular == '' || ftelefone == ''){
+        validarNome();
+        validarCPF();
+        validarEmail();
+        validarCelular();
+        validarTelefone();
+        return false;
+    }
     
     console.log(fnome);
     console.log(fCPF);

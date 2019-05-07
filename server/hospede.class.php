@@ -131,6 +131,7 @@ class Hospede{
     }
     
     public function excluirHospede($id){
+        $id = $this->filtraEntrada($id);
         $sql = "UPDATE hospedes SET status = '0' WHERE id = :id";
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(":id", $id);
@@ -165,10 +166,13 @@ class Hospede{
     
     public function existeEmail($email, $id=''){
         if($id == ''){
+            $email = $this->filtraEntrada($email);
             $sql = "SELECT * FROM hospedes WHERE email = :email";
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(":email", $email);
         }else{
+            $email = $this->filtraEntrada($email);
+            $id = $this->filtraEntrada($id);
             $sql = "SELECT * FROM hospedes WHERE email = :email and id != :id";
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(":email", $email);
@@ -184,10 +188,13 @@ class Hospede{
     
     public function existeCPF($CPF, $id=''){
         if($id == ''){
+            $CPF = $this->filtraEntrada($CPF);
             $sql = "SELECT * FROM hospedes WHERE CPF = :CPF";
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(":CPF", $CPF);
         }else{
+            $CPF = $this->filtraEntrada($CPF);
+            $id = $this->filtraEntrada($id);
             $sql = "SELECT * FROM hospedes WHERE CPF = :CPF and id != :id";
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(":CPF", $CPF);
