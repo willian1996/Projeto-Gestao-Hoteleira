@@ -6,14 +6,14 @@ require_once 'header.php';
 <div class="container">
     <a href="lista-hospedes.php">Voltar para lista</a>
     <div class="form_cadastrar_hospede">
-        <h2>Cadastrar Hospede</h2>
+        <h2>Cadastrar Hóspede</h2>
         Nome Completo:<br>
         <input onfocusout="validarNome()" type="text" id="fnome_completo" name="nome_completo" required/><span id="spannome"></span>
         <br><br>
         CPF:<br>
         <input onfocusout="validarCPF()" type="text" id="fCPF" name="CPF" required/><span id="spancpf"></span>
         <br><br>
-        Email:<br>
+        E-mail:<br>
         <input onfocusout="validarEmail()" type="email" id="femail" name="email" required/><span id="spanemail"></span>
         <br><br>
         Celular:<br>
@@ -22,7 +22,7 @@ require_once 'header.php';
         Telefone:<br>
         <input onfocusout="validarTelefone()" type="tel" id="ftelefone" name="telefone" required/><span id="spantelefone"></span>
         <br><br>
-        <button id="botaoCadastrar" onclick="criarHospede()">Cadastrar</button>
+        <button id="botaoCadastrar" onclick="cadastrarHospede()">Cadastrar</button>
     </div>
 </div>
 

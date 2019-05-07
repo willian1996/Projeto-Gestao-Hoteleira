@@ -1,4 +1,5 @@
-const urlHostServ = 'http://localhost/Projeto-Gestao-Hoteleira/lista-hospedes.php';
+const urlHostServer = 'http://localhost/Projeto-Gestao-Hoteleira/';
+
 
 //selecinando os td da tabela detalhes-hospede
 const objNomeTd = document.getElementById('tdNome');
@@ -26,10 +27,12 @@ var spanfTelefone = document.getElementById('spantelefone');
 function validarNome(){
     if(objfnome.value == ''){
         objfnome.style.borderColor = '#f00';
+        objfnome.focus();
         botaoCadastrar.disabled = true;
         spanfNome.innerHTML = ' O campo Nome não pode estar vazio';
     }else if(objfnome.value.length < 10){
         objfnome.style.borderColor = '#f00';
+        objfnome.focus();
         botaoCadastrar.disabled = true;
         spanfNome.innerHTML = ' Digite seu Nome completo';
     }else{
@@ -72,6 +75,7 @@ function validarCPF(){
                 if(resposta.existe){
                     spanfCPF.innerHTML = ' '+resposta.mensagem;
                     objfCPF.style.borderColor = '#f00';
+                    objfCPF.focus();
                     botaoCadastrar.disabled = true;
                 }else{
                     spanfCPF.innerHTML = '';
@@ -87,6 +91,7 @@ function validarCPF(){
     //validando CPF 
     if(objfCPF.value == ''){
         objfCPF.style.borderColor = '#f00';
+        objfCPF.focus();
         spanfCPF.innerHTML = ' O campo CPF não pode estar vazio';
         botaoCadastrar.disabled = true;
     }else if(!testaCPF(objfCPF.value)){
@@ -114,6 +119,7 @@ function validarEmail(){
                 if(resposta.existe){
                     spanfEmail.innerHTML = ' '+resposta.mensagem;
                     objfemail.style.borderColor = '#f00';
+                    objfemail.focus();
                     botaoCadastrar.disabled = true;
                 }else{
                     spanfEmail.innerHTML = '';
@@ -132,6 +138,7 @@ function validarEmail(){
         botaoCadastrar.disabled = true;
     }else if(objfemail.value.indexOf('@')==-1 || objfemail.value.indexOf('.')==-1){
         objfemail.style.borderColor = '#f00';
+        objfemail.focus();
         spanfEmail.innerHTML = " Preencha campo E-mail corretamente!";  
         botaoCadastrar.disabled = true;
     }else{
@@ -143,10 +150,12 @@ function validarEmail(){
 function validarCelular(){
     if(objfcelular.value == ''){
         objfcelular.style.borderColor = '#f00';
+        objfcelular.focus();
         spanfCelular.innerHTML = ' O campo Celular não pode estar vazio';
         botaoCadastrar.disabled = true;
     }else if(objfcelular.value.length != 11){
         objfcelular.style.borderColor = '#f00';
+        objfcelular.focus();
         spanfCelular.innerHTML = ' Preencha o campo celular corretamente com o DDD';
         botaoCadastrar.disabled = true;
     }else{
@@ -160,10 +169,12 @@ function validarCelular(){
 function validarTelefone(){
     if(objftelefone.value == ''){
         objftelefone.style.borderColor = '#f00';
+        objftelefone.focus();
         spanfTelefone.innerHTML = ' O campo Telefone não pode estar vazio';
         botaoCadastrar.disabled = true;
     }else if(objftelefone.value.length != 10){
         objftelefone.style.borderColor = '#f00';
+        objftelefone.focus();
         spanfTelefone.innerHTML = ' Preencha o campo Telefone corretamente com o DDD';
         botaoCadastrar.disabled = true;
     }else{
@@ -174,7 +185,7 @@ function validarTelefone(){
 }
 
 //criando cadastro de hospede
-function criarHospede(){
+function cadastrarHospede(){
     const fnome = objfnome.value;
     const fCPF = objfCPF.value;
     const femail = objfemail.value;
@@ -190,11 +201,25 @@ function criarHospede(){
         return false;
     }
     
-    console.log(fnome);
-    console.log(fCPF);
-    console.log(femail);
-    console.log(fcelular);
-    console.log(ftelefone); 
+    if(window.XMLHttpRequest){
+        var ajax = new XMLHttpRequest();
+    }else{
+        var ajax = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    ajax.open('POST', 'server/cadastrar-hospede.php', true);
+    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    ajax.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            var resposta = JSON.parse(this.response);
+            if(resposta.deucerto){
+                alert(resposta.mensagem);
+                window.location.href = urlHostServer+'detalhes-hospede.php?id='+resposta.idHosped;
+            }else{
+                console.log(resposta.mensagem);
+            }
+        }
+    };
+    ajax.send('nome='+fnome+'&cpf='+fCPF+'&email='+femail+'&telefone='+ftelefone+'&celular='+fcelular);
 }
 
 
@@ -292,7 +317,7 @@ function excluirHospede(id){
                 var resposta = JSON.parse(this.response);
                 if(resposta.deucerto){
                     alert(resposta.mensagem);
-                    window.location.href = urlHostServ;
+                    window.location.href = urlHostServer+'lista-hospedes.php';
                 }else{
                     alert(resposta.mensagem);
                 }

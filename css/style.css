@@ -116,6 +116,9 @@ div.container{
         height: 50px;
         font-size: 20px;
     }
+    .form_cadastrar_hospede span{
+        display: inline-block;
+    }
     
 }
 
