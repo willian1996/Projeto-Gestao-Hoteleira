@@ -163,7 +163,7 @@ class Hospede{
     
     
     
-    private function existeEmail($email, $id=''){
+    public function existeEmail($email, $id=''){
         if($id == ''){
             $sql = "SELECT * FROM hospedes WHERE email = :email";
             $sql = $this->pdo->prepare($sql);

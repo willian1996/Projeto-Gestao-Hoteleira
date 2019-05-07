@@ -15,19 +15,27 @@ const objfcelular = document.getElementById('fcelular');
 const objftelefone = document.getElementById('ftelefone');
 const botaoCadastrar = document.getElementById('botaoCadastrar');
 
+var spanfCPF = document.getElementById('spancpf');
+var spanfNome = document.getElementById('spannome');
+var spanfEmail = document.getElementById('spanemail');
+var spanfCelular = document.getElementById('spancelular');
+var spanfTelefone = document.getElementById('spantelefone');
+
+
 //validando input nome 
 function validarNome(){
     if(objfnome.value == ''){
         objfnome.style.borderColor = '#f00';
         botaoCadastrar.disabled = true;
-        console.log('o campo nome não pode estar vazio');
+        spanfNome.innerHTML = ' O campo nome não pode estar vazio';
     }else if(objfnome.value.length < 10){
         objfnome.style.borderColor = '#f00';
         botaoCadastrar.disabled = true;
-        console.log('Digite seu nome completo');
+        spanfNome.innerHTML = ' Digite seu nome completo';
     }else{
         botaoCadastrar.disabled = false;
         objfnome.style.borderColor = '#F8F8FF';
+        spanfNome.innerHTML = '';
     }
 }
 
@@ -39,17 +47,13 @@ function validarCPF(){
         var Resto;
         Soma = 0;
         if (strCPF == "00000000000") return false;
-
         for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
         Resto = (Soma * 10) % 11;
-
         if ((Resto == 10) || (Resto == 11))  Resto = 0;
         if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
-
         Soma = 0;
         for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
         Resto = (Soma * 10) % 11;
-
         if ((Resto == 10) || (Resto == 11))  Resto = 0;
         if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
         return true;
@@ -57,7 +61,6 @@ function validarCPF(){
     
     //verificando se o CPF já existe no banco de dados
     function existeCPF(strCPF){
-        var existeCPFNoBanco;
         if(window.XMLHttpRequest){
             var ajax = new XMLHttpRequest();
         }else{
@@ -66,34 +69,75 @@ function validarCPF(){
         ajax.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
                 var resposta = JSON.parse(this.response);
-                console.log(resposta.existe);
-                existeCPFNoBanco = resposta.existe;
+                if(resposta.existe){
+                    spanfCPF.innerHTML = ' '+resposta.mensagem;
+                    objfCPF.style.borderColor = '#f00';
+                    botaoCadastrar.disabled = true;
+                }else{
+                    spanfCPF.innerHTML = '';
+                    botaoCadastrar.disabled = false;
+                    objfCPF.style.borderColor = '#F8F8FF'; 
+                } 
             }
         };
         ajax.open('GET', 'server/existe-cpf.php?cpf='+strCPF, true);
-        ajax.send();
-        return existeCPFNoBanco;
+        ajax.send(); 
     }
     
-    //validando
+    //validando CPF 
     if(objfCPF.value == ''){
         objfCPF.style.borderColor = '#f00';
-        console.log('o campo CPF não pode estar vazio');
+        spanfCPF.innerHTML = ' O campo CPF não pode estar vazio';
         botaoCadastrar.disabled = true;
     }else if(!testaCPF(objfCPF.value)){
         objfCPF.style.borderColor = '#f00';
-        console.log('CPF inválido');
-        botaoCadastrar.disabled = true;
-    }else if(existeCPF(objfCPF.value)){
-        objfCPF.style.borderColor = '#f00';
-        console.log('CPF já esta e uso em outro registro');
+        objfCPF.focus();
+        spanfCPF.innerHTML =' CPF inválido';
         botaoCadastrar.disabled = true;
     }else{
-        botaoCadastrar.disabled = false;
-        objfCPF.style.borderColor = '#F8F8FF'; 
+        existeCPF(objfCPF.value);
     }
 }
 
+//validando input Email
+function validarEmail(){
+    //verificando se e-mail ja está cadastrado no banco
+    function existeEmail(strEmail){
+    if(window.XMLHttpRequest){
+            var ajax = new XMLHttpRequest();
+        }else{
+            var ajax = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        ajax.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                var resposta = JSON.parse(this.response);
+                if(resposta.existe){
+                    spanfEmail.innerHTML = ' '+resposta.mensagem;
+                    objfemail.style.borderColor = '#f00';
+                    botaoCadastrar.disabled = true;
+                }else{
+                    spanfEmail.innerHTML = '';
+                    botaoCadastrar.disabled = false;
+                    objfemail.style.borderColor = '#F8F8FF'; 
+                } 
+            }
+        };
+        ajax.open('GET', 'server/existe-email.php?email='+strEmail, true);
+        ajax.send();
+    }
+    //validando email
+    if(objfemail.value == ""){
+        objfemail.style.borderColor = '#f00';
+        spanfEmail.innerHTML = " O campo E-mail não pode estar vazio!";
+        botaoCadastrar.disabled = true;
+    }else if(objfemail.value.indexOf('@')==-1 || objfemail.value.indexOf('.')==-1){
+        objfemail.style.borderColor = '#f00';
+        spanfEmail.innerHTML = " Preencha campo E-mail corretamente!";  
+        botaoCadastrar.disabled = true;
+    }else{
+        existeEmail(objfemail.value);
+    }
+}
 
 function criarHospede(){
     const fnome = objfnome.value;
@@ -188,7 +232,6 @@ function editarHospede(id){
     }
 }
 
-
 //Esta função desativa o hospede para não ser mostrado mais na lista de hospedes 
 function excluirHospede(id){
     var resposta = confirm("Deseja excluir este hospede?");
@@ -216,56 +259,3 @@ function excluirHospede(id){
         alert('Exclusão cancelada');
     }
 }
-    
-    
-    
-    
-    
-
-//verificando se o CPF já existe no banco de dados
-    function existeCPF(strCPF){
-        var existeCPFNoBanco;
-        if(window.XMLHttpRequest){
-            var ajax = new XMLHttpRequest();
-        }else{
-            var ajax = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        ajax.onreadystatechange = function(){
-            if(this.readyState == 4 && this.status == 200){
-                var resposta = JSON.parse(this.response);
-                console.log(resposta.mensagem);
-                existeCPFNoBanco = resposta.mensagem;
-                
-                
-            }
-        };
-        ajax.open('GET', 'server/existe-cpf.php?cpf='+strCPF, true);
-        ajax.send();
-        return existeCPFNoBanco;
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
