@@ -206,7 +206,7 @@ function cadastrarHospede(){
     }else{
         var ajax = new ActiveXObject("Microsoft.XMLHTTP");
     }
-    ajax.open('POST', 'server/cadastrar-hospede.php', true);
+    ajax.open('POST', 'server/cadastrar-hospede-submit.php', true);
     ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     ajax.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
@@ -280,7 +280,7 @@ function editarHospede(id){
             }else{
                 var ajax = new ActiveXObject("Microsoft.XMLHTTP");
             }
-            ajax.open('POST', 'server/editar-hospede.php', true);
+            ajax.open('POST', 'server/editar-hospede-submit.php', true);
             ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             ajax.onreadystatechange = function(){
                 if(this.readyState == 4 && this.status == 200){
