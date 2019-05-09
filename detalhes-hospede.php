@@ -1,7 +1,6 @@
 <?php
 require_once 'server/hospede.class.php';
-require_once 'server/conexao.php';
-$hospede = new Hospede($pdo);
+$hospede = new Hospede();
 
 if(isset($_GET['id']) and !empty($_GET['id'])){
     $id = $_GET['id'];

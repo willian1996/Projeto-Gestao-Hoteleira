@@ -1,7 +1,6 @@
 <?php
-require_once 'server/conexao.php';
 require_once 'server/hospede.class.php';
-$hospede = new Hospede($pdo);
+$hospede = new Hospede();
 
 require_once 'header.php';
 ?>

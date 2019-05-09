@@ -1,15 +1,13 @@
 <?php
+require_once 'conexao.class.php';
 
-class Usuario{
+class Usuario extends Conexao{
     private $id;
     private $email;
     private $senha;
     private $nome;
-    private $pdo;
     
-    public function __construct($pdo){
-        $this->pdo = $pdo;
-    }
+    
     
     public function infoUsuario($id){
         $sql = "SELECT * FROM usuarios WHERE id = :id";
@@ -25,7 +23,6 @@ class Usuario{
             $this->setNome($data['nome']);            
         }
     }
-    
     
     public function setId($id){
         $this->id = $id;

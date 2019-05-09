@@ -1,20 +1,19 @@
 <?php
+require_once 'conexao.class.php';
 /*
 * CLASSE PARA HOSPEDES
 * ESTA CLASSE CRIA, LÊ, ATUALIZA E DELETA HOSPEDES
 * @package GESTÃO HOTELEIRA
 * @author WILLIAN <williansalesgabriel@hotmail.com>
 */
-class Hospede{
-    private $pdo;
+class Hospede extends Conexao{
+   
     /*
     * MÉTODO CONSTRUTOR PARA CONECTAR COM O BANCO DE DADOS
     *@param RECEBE A VARIAVEL $PDO VINDO DO ARQUIVO CONEXAO.PHP
     * @author WILLIAN <williansalesgabriel@hotmail.com>
     */
-    public function __construct($pdo){
-        $this->pdo = $pdo;
-    }
+
     
     /*
     * MÉTODO PARA CADASTRAR HOSPEDES NO BANCO DE DADOS 
@@ -268,22 +267,6 @@ class Hospede{
         }else{
             return false;
         }
-    }
-    
-    /*
-    * MÉTODO PARA PROTEJER O BANCO DE DADOS DE SQL INJECTION   
-    * @param DADO A FILTRAR  
-    * @return DADO FILTRADO 
-    * @author WILLIAN <williansalesgabriel@hotmail.com>
-    */
-    private function filtraEntrada($campo){
-        // remove espaços no início e no final
-        $campo = trim($campo); 
-        // remove tags html
-        $campo = strip_tags($campo); 
-        // adiciona caractere de escape nas aspas e apostófros
-        $campo = addslashes($campo); 
-        return $campo;
     }
 
 }/*FIM DA CLASSE HOSPEDE*/
