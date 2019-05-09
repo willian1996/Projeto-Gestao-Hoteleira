@@ -16,6 +16,7 @@ const objfcelular = document.getElementById('fcelular');
 const objftelefone = document.getElementById('ftelefone');
 const botaoCadastrar = document.getElementById('botaoCadastrar');
 
+//span para avisar algum erro no formulario form_cadastrar_hospede
 var spanfCPF = document.getElementById('spancpf');
 var spanfNome = document.getElementById('spannome');
 var spanfEmail = document.getElementById('spanemail');
@@ -23,7 +24,7 @@ var spanfCelular = document.getElementById('spancelular');
 var spanfTelefone = document.getElementById('spantelefone');
 
 
-//validando input nome 
+//validando input nome no formulario form_cadastrar_hospede
 function validarNome(){
     if(objfnome.value == ''){
         objfnome.style.borderColor = '#f00';
@@ -42,26 +43,26 @@ function validarNome(){
     }
 }
 
-//validando input CPF
+//testando CPF válido
+function testaCPF(strCPF){
+    var Soma;
+    var Resto;
+    Soma = 0;
+    if (strCPF == "00000000000") return false;
+    for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+    Resto = (Soma * 10) % 11;
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
+    Soma = 0;
+    for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
+    if ((Resto == 10) || (Resto == 11))  Resto = 0;
+    if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+    return true;
+}
+
+//validando input CPF no formulario form_cadastrar_hospede
 function validarCPF(){
-    //testando CPF válido
-    function testaCPF(strCPF){
-        var Soma;
-        var Resto;
-        Soma = 0;
-        if (strCPF == "00000000000") return false;
-        for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
-        Resto = (Soma * 10) % 11;
-        if ((Resto == 10) || (Resto == 11))  Resto = 0;
-        if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
-        Soma = 0;
-        for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
-        Resto = (Soma * 10) % 11;
-        if ((Resto == 10) || (Resto == 11))  Resto = 0;
-        if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
-        return true;
-    }
-    
     //verificando se o CPF já existe no banco de dados
     function existeCPF(strCPF){
         if(window.XMLHttpRequest){
@@ -232,18 +233,18 @@ function editarHospede(id){
     const telefone = objTelefoneTd.innerHTML;
     const celular = objCelularTd.innerHTML;
     
-    //deixando a tabela editavel 
+    //deixando a tabela detalhes do hospede editavel 
     const tdNome = objNomeTd.innerHTML = '<input class="input-td" type="text" name="nome_completo" value="'+nome+'">';
     const tdCPF = objCPFTd.innerHTML = '<input class="input-td" type="text" name="CPF" value="'+CPF+'">';
     const tdEmail = objEmailTd.innerHTML = '<input class="input-td" type="email" name="email" value="'+email+'">';
     const tdTelefone = objTelefoneTd.innerHTML = '<input class="input-td" type="text" name="telefone" value="'+telefone+'">';
     const tdCelular = objCelularTd.innerHTML = '<input class="input-td" type="text" name="celular" value="'+celular+'">';
     
-    //escondendo os botoes editar e excluir da tabela
+    //escondendo os botoes editar e excluir da tabela detalhes do hospede
     const botaoEditar = document.getElementById('editarHospede').style.display = 'none';
     const botaoExcluir = document.getElementById('excluirHospede').style.display = 'none';
     
-    //criando o botao salvar
+    //criando o botao salvar na tabela detalhes do hospede
     const botaoSalvar = document.createElement('button');
     botaoSalvar.innerHTML = 'Salvar';
     var atributoClass = document.createAttribute("class");       
@@ -252,7 +253,7 @@ function editarHospede(id){
     var tabela = document.getElementsByClassName('detalhes-hospede')[0];
     tabela.insertBefore(botaoSalvar , tabela.childNodes[2]);
     
-    //criando botao cancelar 
+    //criando botao cancelar na tabela detalhes do hospede
     const botaoCancelar = document.createElement('button');
     botaoCancelar.innerHTML = 'Cancel';
     var atributoClass = document.createAttribute("class");       
@@ -261,11 +262,11 @@ function editarHospede(id){
     var tabela = document.getElementsByClassName('detalhes-hospede')[0];
     tabela.insertBefore(botaoCancelar, tabela.childNodes[2]);
     
-    //carregando a pagina após clicar em cancelar
+    //carregando a pagina após clicar em cancelar edição da tabela detalhes do hospede
     botaoCancelar.onclick = function(){
         location.reload();
     }
-    //salvando alterações
+    //salvando alterações na tabela detalhes do hospede
     botaoSalvar.onclick = function(){
         const tdValor = document.getElementsByClassName('input-td');
         const novoNome = tdValor[0].value;
@@ -274,6 +275,18 @@ function editarHospede(id){
         const novoTelefone = tdValor[3].value;
         const novoCelular = tdValor[4].value;
         const resposta = confirm("Deseja salvar alterações?");
+        //verificando se o CPF é valido 
+        if(!testaCPF(novoCPF)){
+            alert('CPF inválido');
+            tdValor[1].style.borderColor = '#F00';
+            return false;
+        }
+        //verificando se o e-mail é válido
+        if(novoEmail.indexOf('@')==-1 || novoEmail.indexOf('.')==-1){
+            alert('Email inválido');
+            tdValor[2].style.borderColor = '#F00';
+            return false;
+        }
         if(resposta == true){
             if(window.XMLHttpRequest){
                 var ajax = new XMLHttpRequest();

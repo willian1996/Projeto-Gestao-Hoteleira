@@ -8,7 +8,8 @@
 class Hospede{
     private $pdo;
     /*
-    * MÉTODO CONSTRUTOR PARA CONECTAR COM O BANCO DE DADOS 
+    * MÉTODO CONSTRUTOR PARA CONECTAR COM O BANCO DE DADOS
+    *@param RECEBE A VARIAVEL $PDO VINDO DO ARQUIVO CONEXAO.PHP
     * @author WILLIAN <williansalesgabriel@hotmail.com>
     */
     public function __construct($pdo){
