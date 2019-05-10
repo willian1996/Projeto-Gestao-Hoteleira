@@ -1,5 +1,5 @@
 <?php
-class Conexao{
+abstract class Conexao{
     private $dbname;
     private $host;
     private $dbuser;
@@ -18,7 +18,7 @@ class Conexao{
             $this->pdo = new PDO("mysql:host=".$this->host.";dbname=".$this->dbname, $this->dbuser, $this->dbpass);
             $this->setStatus("Conectado!");
         }catch(PDOException $e){
-            $this->setStatus("Não conectado! ".$e->getMessage());
+            $this->setStatus("Não conectado!");
         }
         
     }
@@ -30,7 +30,7 @@ class Conexao{
         $this->status = $s;
     }
     
-    public function dataAtual(){
+    protected function dataAtual(){
         date_default_timezone_set('America/Sao_Paulo');
         return date("Y-m-d H:i:s");
     }

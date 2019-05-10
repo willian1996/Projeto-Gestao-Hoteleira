@@ -2,8 +2,6 @@
 require_once 'conexao.class.php';
 
 class Funcionario extends Conexao{
-    
-    
     private $nome;
     private $email;
     private $senha;
@@ -18,11 +16,56 @@ class Funcionario extends Conexao{
         return $this->$atributo;
     }
     
-    public function selecionar($dado){
+    public function inserir($dados){
+        $this->nome = $this->filtraEntrada($dados['nome']);
+        $this->email = $this->filtraEntrada($dados['email']);
+        $this->senha = $this->filtraEntrada(sha1($dados['senha']));
+        $this->dataCadastro = $this->dataAtual();
         try{
-            $sql = "SELECT * FROM usuarios WHERE id = :id";
+            $sql = "INSERT INTO funcionarios (nome, email, senha, dataCadastro) values (:nome, :email, :senha, :dataCadastro)";
             $sql = $this->pdo->prepare($sql);
-            $sql->bindValue(":id", $idFuncionario);
+            $sql->bindValue(":nome", $this->nome);
+            $sql->bindValue(":email", $this->email);
+            $sql->bindValue(":senha", $this->senha);
+            $sql->bindValue(":dataCadastro", $this->dataCadastro);
+            $sql->execute();
+            
+            if($sql->rowCount() > 0){
+                $retorno['deucerto'] = true;
+                $retorno['mensagem'] = "funcionário cadastrado com sucesso!";
+                return $retorno;
+            }else{
+                $retorno['deucerto'] = false;
+                $retorno['mensagem'] = "Erro! nao cadastrado";
+                return $retorno;
+            }
+            
+        }catch(PDOException $e){
+            $retorno['deucerto'] = false;
+            $retorno['mensagem'] = "Erro no servidor";
+            return $retorno;
+        }
+    }
+    
+    public function listar(){
+        try{
+            $sql = "SELECT * FROM funcionarios";
+            $sql = $this->pdo->prepare($sql);
+            $sql->execute();
+            return $sql->fetchAll();
+            
+        }catch(PDOException $e){
+            return "Erro! ".$e->getMessage();
+        }
+    }
+    
+    
+    public function selecionar($dados){
+        $this->idFuncionario = $this->filtraEntrada($dados['id']);
+        try{
+            $sql = "SELECT * FROM funcionarios WHERE id = :id";
+            $sql = $this->pdo->prepare($sql);
+            $sql->bindValue(":id", $this->idFuncionario);
             $sql->execute();
             return $sql->fetch();
             
@@ -31,46 +74,59 @@ class Funcionario extends Conexao{
         }
     }
     
-    public function listar(){
-        try{
-            $sql = "SELECT * FROM usuarios";
-            $sql = $this->pdo-prepare($sql);
-            $sql>execute();
-            return $sql->fetchAll();
-            
-        }catch(PDOException $e){
-            return "Erro! ".$e->getMessage();
-        }
-    }
     
-    public function inserir($dados){
+    public function atualizar($dados){
+        $this->idFuncionario = $this->filtraEntrada($dados['id']);
         $this->nome = $this->filtraEntrada($dados['nome']);
         $this->email = $this->filtraEntrada($dados['email']);
         $this->senha = $this->filtraEntrada(sha1($dados['senha']));
         $this->dataCadastro = $this->dataAtual();
         try{
-            $sql = "INSERT INTO usuarios (nome, email, senha, dataCadastro) values (:nome, :email, :senha, :dataCadastro)";
+            $sql = "UPDATE funcionarios SET nome = :nome, email = :email, senha = :senha WHERE id = :id";
             $sql = $this->pdo->prepare($sql);
-            $sql->
+            $sql->bindValue(":id", $this->idFuncionario);
+            $sql->bindValue(":nome", $this->nome);
+            $sql->bindValue(":email", $this->email);
+            $sql->bindValue(":senha", $this->senha);
+            $sql->execute();
             
+            if($sql->rowCount() > 0){
+                $retorno['deucerto'] = true;
+                $retorno['mensagem'] = "funcionário editado com sucesso!";
+                return $retorno;
+            }else{
+                $retorno['deucerto'] = false;
+                $retorno['mensagem'] = "Não alterado!";
+                return $retorno;
+            }
         }catch(PDOException $e){
-            return "Erro! ".$e->getMessage();
-        }
-    }
-    
-    public function atualizar($dados){
-        try{
-            
-        }catch(PDOException $e){
-            
+            $retorno['deucerto'] = false;
+            $retorno['mensagem'] = "Erro no servidor!";
+            return $retorno;
         }
     }
     
     public function deletar($dados){
+        $this->idFuncionario = $dados['id']; 
         try{
+            $sql = "DELETE FROM funcionarios WHERE id = :id";
+            $sql = $this->pdo->prepare($sql);
+            $sql->bindValue(":id", $this->idFuncionario);
+            $sql->execute();
             
+            if($sql->rowCount() > 0){
+                $retorno['deucerto'] = true;
+                $retorno['mensagem'] = "funcionário excluído com sucesso!";
+                return $retorno;
+            }else{
+                $retorno['deucerto'] = false;
+                $retorno['mensagem'] = "Não excluído";
+                return $retorno;
+            }
         }catch(PDOException $e){
-            
+            $retorno['deucerto'] = false;
+            $retorno['mensagem'] = "Erro no servidor";
+            return $retorno;
         }
     }
     
@@ -81,5 +137,3 @@ class Funcionario extends Conexao{
     
     
 }
-
-

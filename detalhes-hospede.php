@@ -40,6 +40,10 @@ require_once 'header.php';
                 <th>Celular</th>
                 <td id="tdCelular"><?php echo $info['celular']; ?></td> 
             </tr>
+            <tr>
+                <th>Cadastrado</th>
+                <td id="tdCelular"><?php echo date('d/m/y H:i', strtotime($info['dataCadastro']));  ?></td> 
+            </tr>
         </table><!--info-hospede-->
     </div><!--tabela-detalhes-hospede-->
     

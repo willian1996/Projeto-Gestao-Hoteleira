@@ -21,13 +21,14 @@ class Hospede extends Conexao{
     * @return ARRAY BOOLEAN E MENSAGEM DE STATUS
     * @author WILLIAN <williansalesgabriel@hotmail.com>
     */
-    public function cadastrarHospede($nome_completo, $CPF, $email, $celular, $telefone){
+    public function cadastrarHospede($dados){
         //aplicando segurança nas entradas 
-        $nome_completo = $this->filtraEntrada($nome_completo);
-        $CPF = $this->filtraEntrada($CPF);
-        $email = $this->filtraEntrada($email);
-        $celular = $this->filtraEntrada($celular);
-        $telefone = $this->filtraEntrada($telefone);
+        $nome_completo = $this->filtraEntrada($dados["novoNome"]);
+        $CPF = $this->filtraEntrada($dados["novoCPF"]);
+        $email = $this->filtraEntrada($dados["novoEmail"]);
+        $celular = $this->filtraEntrada($dados["novoCelular"]);
+        $telefone = $this->filtraEntrada($dados["novoTelefone"]);
+        $dataCadastro = $this->dataAtual();
         
         //verificando se alguns dos campos estão vazios 
         if($nome_completo == '' or $CPF == '' or $email == '' or $celular == '' or $telefone == ''){
@@ -48,13 +49,14 @@ class Hospede extends Conexao{
             return $retorno;
         }
         try{
-            $sql = "INSERT INTO hospedes (nome_completo, CPF, email, celular, telefone) VALUES (:nome_completo, :CPF, :email, :celular, :telefone)";
+            $sql = "INSERT INTO hospedes (nome_completo, CPF, email, celular, telefone, dataCadastro) VALUES (:nome_completo, :CPF, :email, :celular, :telefone, :dataCadastro)";
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(":nome_completo", $nome_completo);
             $sql->bindValue(":CPF", $CPF);
             $sql->bindValue(":email", $email);
             $sql->bindValue(":celular", $celular);
             $sql->bindValue(":telefone", $telefone);
+            $sql->bindValue(":dataCadastro", $dataCadastro);
             $sql->execute();
 
             if($sql->rowCount() > 0){
@@ -134,14 +136,14 @@ class Hospede extends Conexao{
     * @return ARRAY COM UM REGISTRO 
     * @author WILLIAN <williansalesgabriel@hotmail.com>
     */
-    public function editarHospede($id, $nome_completo, $CPF, $email, $celular, $telefone){
+    public function editarHospede($dados){
         //aplicando segurança nas entradas
-        $id = $this->filtraEntrada($id);
-        $nome_completo = $this->filtraEntrada($nome_completo);
-        $CPF = $this->filtraEntrada($CPF);
-        $email = $this->filtraEntrada($email);
-        $celular = $this->filtraEntrada($celular);
-        $telefone = $this->filtraEntrada($telefone);
+        $id = $this->filtraEntrada($dados["id"]);
+        $nome_completo = $this->filtraEntrada($dados["novoNome"]);
+        $CPF = $this->filtraEntrada($dados["novoCPF"]);
+        $email = $this->filtraEntrada($dados["novoEmail"]);
+        $celular = $this->filtraEntrada($dados["novoCelular"]);
+        $telefone = $this->filtraEntrada($dados["novoTelefone"]);
         
         
         //verificando se alguns dos campos estão vazios 

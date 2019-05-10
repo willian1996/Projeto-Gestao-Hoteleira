@@ -10,14 +10,14 @@ $hospede = new Hospede();
 
 
 //pegando os valores do ajax 
-$novoNovo = $_POST['nome'];
-$novoCPF = $_POST['cpf'];
-$novoEmail = $_POST['email'];
-$novoTelefone = $_POST['telefone'];
-$novoCelular = $_POST['celular'];
+$dados["novoNome"] = $_POST['nome'];
+$dados["novoCPF"] = $_POST['cpf'];
+$dados["novoEmail"] = $_POST['email'];
+$dados["novoTelefone"] = $_POST['telefone'];
+$dados["novoCelular"] = $_POST['celular'];
 
 //chamando o metoto para alteração 
-$retorno = $hospede->cadastrarHospede($novoNovo, $novoCPF, $novoEmail, $novoCelular, $novoTelefone);
+$retorno = $hospede->cadastrarHospede($dados);
 
 //devolvendo resposta para o ajax 
 echo json_encode($retorno);
