@@ -17,11 +17,19 @@ const objftelefone = document.getElementById('ftelefone');
 const botaoCadastrar = document.getElementById('botaoCadastrar');
 
 //span para avisar algum erro no formulario form_cadastrar_hospede
-var spanfCPF = document.getElementById('spancpf');
-var spanfNome = document.getElementById('spannome');
-var spanfEmail = document.getElementById('spanemail');
-var spanfCelular = document.getElementById('spancelular');
-var spanfTelefone = document.getElementById('spantelefone');
+const spanfCPF = document.getElementById('spancpf');
+const spanfNome = document.getElementById('spannome');
+const spanfEmail = document.getElementById('spanemail');
+const spanfCelular = document.getElementById('spancelular');
+const spanfTelefone = document.getElementById('spantelefone');
+
+//selecionando os inputs formulario cadastrar funcionario
+const nomeFuncionario = document.getElementById('nomeFunc');
+const emailFuncionario = document.getElementById('emailFunc');
+const senhaFuncionario = document.getElementById('senhaFunc');
+
+const emailLogin = document.getElementById('emailLogin');
+const senhaLogin = document.getElementById('senhaLogin');
 
 
 //validando input nome no formulario form_cadastrar_hospede
@@ -216,7 +224,7 @@ function cadastrarHospede(){
                 alert(resposta.mensagem);
                 window.location.href = urlHostServer+'detalhes-hospede.php?id='+resposta.idHosped;
             }else{
-                console.log(resposta.mensagem);
+                alert(resposta.mensagem);
             }
         }
     };
@@ -340,4 +348,77 @@ function excluirHospede(id){
     }else{
         alert('Exclusão cancelada');
     }
+}
+
+//Função para cadastrar funcionario
+
+function cadastrarFuncionario(){
+    if(nomeFuncionario.value == '' || nomeFuncionario.value.length < 10){
+        alert('Digite nome completo!');
+        return false;
+    }
+    if(emailFuncionario.value == '' || emailFuncionario.value.indexOf('@')==-1 || emailFuncionario.value.indexOf('.')==-1){
+        alert('Digite o email corretamente!');
+        return false;
+    }
+    if(senhaFuncionario.value.length < 6){
+        alert('Senha tem que ter no minimo 6 caractere!');
+        return false;
+    }
+    if(window.XMLHttpRequest){
+        var ajax = new XMLHttpRequest();
+    }else{
+        var ajax = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    ajax.open('POST', 'server/cadastrar-funcionario-submit.php', true);
+    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    ajax.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            var resposta = JSON.parse(this.response);
+            if(resposta.deucerto){
+                alert(resposta.mensagem);
+                
+            }else{
+                alert(resposta.mensagem);
+            }
+        }
+    };
+    ajax.send('nomeFunc='+nomeFuncionario.value+'&emailFunc='+emailFuncionario.value+'&senhaFunc='+senhaFuncionario.value);
+    
+}
+
+//loguin funcionario por ajax 
+
+function logarFuncionario(){
+    if(emailLogin.value == ''){
+        alert('Digite seu email!');
+        return false;
+    }
+    if(senhaLogin.value == ''){
+        alert('Digite sua senha!');
+        return false;
+    }
+
+    console.log(emailLogin.value);
+    console.log(senhaLogin.value);
+
+    
+    if(window.XMLHttpRequest){
+        var ajax = new XMLHttpRequest();
+    }else{
+        var ajax = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    ajax.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            var resposta = JSON.parse(this.response);
+            if(resposta.existe){
+                console.log(resposta);
+            }else{
+                console.log(resposta);
+            } 
+        }
+    };
+    ajax.open('GET', 'server/logar-funcionario.php?emailFunc='+emailLogin.value+'&senhaFunc='+senhaLogin.value, true);
+    ajax.send();
+    
 }

@@ -16,7 +16,7 @@ class Funcionario extends Conexao{
         return $this->$atributo;
     }
     
-    public function inserir($dados){
+    public function inserirFuncionario($dados){
         $this->nome = $this->filtraEntrada($dados['nome']);
         $this->email = $this->filtraEntrada($dados['email']);
         $this->senha = $this->filtraEntrada(sha1($dados['senha']));
@@ -47,7 +47,7 @@ class Funcionario extends Conexao{
         }
     }
     
-    public function listar(){
+    public function listarFuncionarios(){
         try{
             $sql = "SELECT * FROM funcionarios";
             $sql = $this->pdo->prepare($sql);
@@ -60,7 +60,7 @@ class Funcionario extends Conexao{
     }
     
     
-    public function selecionar($dados){
+    public function selecionarFuncionario($dados){
         $this->idFuncionario = $this->filtraEntrada($dados['id']);
         try{
             $sql = "SELECT * FROM funcionarios WHERE id = :id";
@@ -75,7 +75,7 @@ class Funcionario extends Conexao{
     }
     
     
-    public function atualizar($dados){
+    public function atualizarFuncionario($dados){
         $this->idFuncionario = $this->filtraEntrada($dados['id']);
         $this->nome = $this->filtraEntrada($dados['nome']);
         $this->email = $this->filtraEntrada($dados['email']);
@@ -106,7 +106,7 @@ class Funcionario extends Conexao{
         }
     }
     
-    public function deletar($dados){
+    public function deletarFuncionario($dados){
         $this->idFuncionario = $dados['id']; 
         try{
             $sql = "DELETE FROM funcionarios WHERE id = :id";
@@ -129,6 +129,40 @@ class Funcionario extends Conexao{
             return $retorno;
         }
     }
+    
+    public function logarFuncionario($dados){
+        $this->email = $dados['email'];
+        $this->senha = sha1($dados['senha']);
+
+        try{
+            $sql = "SELECT * FROM funcionarios WHERE email = :email and senha = :senha";
+            $sql = $this->pdo->prepare($sql);
+            $sql->bindValue(":email", $this->email);
+            $sql->bindValue(":senha", $this->senha);
+            $sql->execute();
+            
+            if($sql->rowCount() > 0){
+                $sql = $sql->fetch();
+                $retorno['deucerto'] = true;
+                $retorno['idFunc'] = $sql['id'];
+                session_start();
+                $_SESSION['idFunc'] = $sql['id'];
+                $_SESSION['nomeFunc'] = $sql['nome'];
+                $_SESSION['emailFunc'] = $sql['email'];
+                return $retorno;
+            }else{
+                $retorno['deucerto'] = false;
+                $retorno['mensagem'] = "E-mail ou senha inválidos!";
+                return $retorno;
+            }
+        }catch(PDOException $e){
+            $retorno['deucerto'] = false;
+            $retorno['mensagem'] = "Erro no servidor!";
+            return $retorno;
+        }
+
+    }
+    
     
     
     
