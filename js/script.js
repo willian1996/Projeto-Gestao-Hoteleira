@@ -399,8 +399,6 @@ function logarFuncionario(){
         return false;
     }
 
-    console.log(emailLogin.value);
-    console.log(senhaLogin.value);
 
     
     if(window.XMLHttpRequest){
@@ -411,10 +409,10 @@ function logarFuncionario(){
     ajax.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             var resposta = JSON.parse(this.response);
-            if(resposta.existe){
-                console.log(resposta);
+            if(resposta.deucerto){
+                window.location.href = urlHostServer+'index.php?func='+resposta.idFunc;
             }else{
-                console.log(resposta);
+                alert(resposta.mensagem);
             } 
         }
     };

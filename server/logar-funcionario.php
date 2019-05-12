@@ -1,7 +1,7 @@
 <?php
-// if(empty($_GET['email'])){
-//     header("Location: ../index.php");
-// }
+if(empty($_GET['emailFunc'])){
+    header("Location: ../index.php");
+}
 
 require_once 'funcionario.class.php';
 

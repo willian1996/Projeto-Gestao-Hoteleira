@@ -1,4 +1,8 @@
 <?php
+session_start();
+if(!isset($_SESSION['idFunc'])){
+    header('Location: login-funcionario.php');
+}
 require_once 'header.php';
 ?>
 
