@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(empty($_POST['email'])){
     header("Location: ../index.php");
 }
@@ -15,6 +16,7 @@ $dados["novoCPF"] = $_POST['cpf'];
 $dados["novoEmail"] = $_POST['email'];
 $dados["novoTelefone"] = $_POST['telefone'];
 $dados["novoCelular"] = $_POST['celular'];
+$dados['autor'] = $_SESSION['idFunc'];
 
 //chamando o metoto para alteração 
 $retorno = $hospede->cadastrarHospede($dados);

@@ -46,7 +46,7 @@ require_once 'header.php';
             </tr>
             <tr>
                 <th>Cadastrado</th>
-                <td id="tdCelular"><?php echo date('d/m/y H:i', strtotime($info['dataCadastro']));  ?></td> 
+                <td id="tdCelular"><?php echo date('d/m/y H:i', strtotime($info['dataCadastro'])).' - '.$info['nome'];  ?></td> 
             </tr>
         </table><!--info-hospede-->
     </div><!--tabela-detalhes-hospede-->

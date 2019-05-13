@@ -7,8 +7,11 @@ require_once 'header.php';
 ?>
 
 <div class="container">
-    <button>Lista Hospede</button><br>
-    <buttom
+    <a href="lista-hospedes.php">Lista Hospede</a><br>
+    <a href="cadastrar-hospede.php">Cadastrar Hospede</a><br>
+    <a href="cadastrar-funcionario.php">Cadastrar Funcionário</a><br>
+    <a href="server/logout.php">Sair</a>
+    
     
 
 

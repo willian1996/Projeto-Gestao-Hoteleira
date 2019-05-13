@@ -29,6 +29,7 @@ class Hospede extends Conexao{
         $celular = $this->filtraEntrada($dados["novoCelular"]);
         $telefone = $this->filtraEntrada($dados["novoTelefone"]);
         $dataCadastro = $this->dataAtual();
+        $autor = $dados["autor"];
         
         //verificando se alguns dos campos estão vazios 
         if($nome_completo == '' or $CPF == '' or $email == '' or $celular == '' or $telefone == ''){
@@ -49,7 +50,7 @@ class Hospede extends Conexao{
             return $retorno;
         }
         try{
-            $sql = "INSERT INTO hospedes (nome_completo, CPF, email, celular, telefone, dataCadastro) VALUES (:nome_completo, :CPF, :email, :celular, :telefone, :dataCadastro)";
+            $sql = "INSERT INTO hospedes (nome_completo, CPF, email, celular, telefone, dataCadastro, autor) VALUES (:nome_completo, :CPF, :email, :celular, :telefone, :dataCadastro, :autor)";
             $sql = $this->pdo->prepare($sql);
             $sql->bindValue(":nome_completo", $nome_completo);
             $sql->bindValue(":CPF", $CPF);
@@ -57,6 +58,7 @@ class Hospede extends Conexao{
             $sql->bindValue(":celular", $celular);
             $sql->bindValue(":telefone", $telefone);
             $sql->bindValue(":dataCadastro", $dataCadastro);
+            $sql->bindValue(":autor", $autor);
             $sql->execute();
 
             if($sql->rowCount() > 0){
@@ -99,7 +101,9 @@ class Hospede extends Conexao{
     * @author WILLIAN <williansalesgabriel@hotmail.com>
     */
     public function infoHospede($id){
-        $sql = "SELECT * FROM hospedes WHERE id = :id";
+        $sql = "select hospedes.*, funcionarios.nome 
+from hospedes join funcionarios
+on funcionarios.id = hospedes.autor where hospedes.id = :id";
         $sql = $this->pdo->prepare($sql);
         $sql->bindValue(":id", $id);
         $sql->execute();
