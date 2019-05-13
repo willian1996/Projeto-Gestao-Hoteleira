@@ -10,10 +10,8 @@ $funcionario = new Funcionario();
 // var_dump($funcionario);
 
 
-
 $dados["email"] = $_GET['emailFunc'];
 $dados["senha"] = $_GET['senhaFunc'];
-
 
 $retorno = $funcionario->logarFuncionario($dados);
 

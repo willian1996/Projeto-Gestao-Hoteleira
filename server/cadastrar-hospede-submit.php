@@ -9,7 +9,6 @@ require_once 'hospede.class.php';
 //estanciando o obj hospede 
 $hospede = new Hospede();
 
-
 //pegando os valores do ajax 
 $dados["novoNome"] = $_POST['nome'];
 $dados["novoCPF"] = $_POST['cpf'];

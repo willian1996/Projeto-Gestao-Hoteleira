@@ -1,6 +1,5 @@
 const urlHostServer = 'http://localhost/Projeto-Gestao-Hoteleira/';
 
-
 //selecinando os td da tabela detalhes-hospede
 const objNomeTd = document.getElementById('tdNome');
 const objCPFTd = document.getElementById('tdCPF');
@@ -28,9 +27,9 @@ const nomeFuncionario = document.getElementById('nomeFunc');
 const emailFuncionario = document.getElementById('emailFunc');
 const senhaFuncionario = document.getElementById('senhaFunc');
 
+//selecionando os inpts do formulario de login do funcionario 
 const emailLogin = document.getElementById('emailLogin');
 const senhaLogin = document.getElementById('senhaLogin');
-
 
 //validando input nome no formulario form_cadastrar_hospede
 function validarNome(){
@@ -172,7 +171,6 @@ function validarCelular(){
         spanfCelular.innerHTML = '';
         botaoCadastrar.disabled = false;
     }
-    
 }
 //validando celular 
 function validarTelefone(){
@@ -242,15 +240,15 @@ function editarHospede(id){
     const celular = objCelularTd.innerHTML;
     
     //deixando a tabela detalhes do hospede editavel 
-    const tdNome = objNomeTd.innerHTML = '<input class="input-td" type="text" name="nome_completo" value="'+nome+'">';
-    const tdCPF = objCPFTd.innerHTML = '<input class="input-td" type="text" name="CPF" value="'+CPF+'">';
-    const tdEmail = objEmailTd.innerHTML = '<input class="input-td" type="email" name="email" value="'+email+'">';
-    const tdTelefone = objTelefoneTd.innerHTML = '<input class="input-td" type="text" name="telefone" value="'+telefone+'">';
-    const tdCelular = objCelularTd.innerHTML = '<input class="input-td" type="text" name="celular" value="'+celular+'">';
+    objNomeTd.innerHTML = '<input class="input-td" type="text" name="nome_completo" value="'+nome+'">';
+    objCPFTd.innerHTML = '<input class="input-td" type="text" name="CPF" value="'+CPF+'">';
+    objEmailTd.innerHTML = '<input class="input-td" type="email" name="email" value="'+email+'">';
+    objTelefoneTd.innerHTML = '<input class="input-td" type="text" name="telefone" value="'+telefone+'">';
+    objCelularTd.innerHTML = '<input class="input-td" type="text" name="celular" value="'+celular+'">';
     
     //escondendo os botoes editar e excluir da tabela detalhes do hospede
-    const botaoEditar = document.getElementById('editarHospede').style.display = 'none';
-    const botaoExcluir = document.getElementById('excluirHospede').style.display = 'none';
+    document.getElementById('editarHospede').style.display = 'none';
+    document.getElementById('excluirHospede').style.display = 'none';
     
     //criando o botao salvar na tabela detalhes do hospede
     const botaoSalvar = document.createElement('button');
@@ -351,7 +349,6 @@ function excluirHospede(id){
 }
 
 //Função para cadastrar funcionario
-
 function cadastrarFuncionario(){
     if(nomeFuncionario.value == '' || nomeFuncionario.value.length < 10){
         alert('Digite nome completo!');
@@ -383,12 +380,10 @@ function cadastrarFuncionario(){
             }
         }
     };
-    ajax.send('nomeFunc='+nomeFuncionario.value+'&emailFunc='+emailFuncionario.value+'&senhaFunc='+senhaFuncionario.value);
-    
+    ajax.send('nomeFunc='+nomeFuncionario.value+'&emailFunc='+emailFuncionario.value+'&senhaFunc='+senhaFuncionario.value); 
 }
 
-//loguin funcionario por ajax 
-
+//login funcionario 
 function logarFuncionario(){
     if(emailLogin.value == ''){
         alert('Digite seu email!');
@@ -399,8 +394,6 @@ function logarFuncionario(){
         return false;
     }
 
-
-    
     if(window.XMLHttpRequest){
         var ajax = new XMLHttpRequest();
     }else{
@@ -418,5 +411,4 @@ function logarFuncionario(){
     };
     ajax.open('GET', 'server/logar-funcionario.php?emailFunc='+emailLogin.value+'&senhaFunc='+senhaLogin.value, true);
     ajax.send();
-    
 }

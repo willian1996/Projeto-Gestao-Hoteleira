@@ -22,14 +22,27 @@ abstract class Conexao{
         }
         
     }
+    /*
+    * MÉTODO PARA PARA RETORNAR O STATUS DA CONEXAO COM BANCO DE DADOS 
+    * @return RETORNA O STATUS DA CONEXAO 
+    * @author WILLIAN <williansalesgabriel@hotmail.com>
+    */
     public function getStatus(){
         return $this->status;
     }
-    
+    /*
+    * MÉTODO PARA PARA SETAR O STATUS DA CONEXAO COM BANCO DE DADOS 
+    * @param RECEBE O STATUS 
+    * @author WILLIAN <williansalesgabriel@hotmail.com>
+    */
     public function setStatus($s){
         $this->status = $s;
     }
-    
+    /*
+    * MÉTODO PARA PEGAR A DATA E HORA ATUAL
+    * @return DATA E HORA ATUAL EM FORMATO PARA BANCO DE DADOS
+    * @author WILLIAN <williansalesgabriel@hotmail.com>
+    */
     protected function dataAtual(){
         date_default_timezone_set('America/Sao_Paulo');
         return date("Y-m-d H:i:s");
