@@ -15,7 +15,7 @@ $dados["novoCPF"] = $_POST['cpf'];
 $dados["novoEmail"] = $_POST['email'];
 $dados["novoTelefone"] = $_POST['telefone'];
 $dados["novoCelular"] = $_POST['celular'];
-$dados['autor'] = $_SESSION['idFunc'];
+$dados['id_funcionario'] = $_SESSION['idFunc'];
 
 //chamando o metoto para alteração 
 $retorno = $hospede->cadastrarHospede($dados);
