@@ -12,8 +12,6 @@ require_once 'header.php';
 <div class="container">
     <a href="cadastrar-hospede.php">Novo Hospede</a>
     <div class="lista-hospedes">
-        <h2>Hospedes cadastrados</h2>
-        
         <table>
             <tr>
                 <th>ID</th>

@@ -9,23 +9,67 @@ a{
 section.header{
     width: 100%;
     height: 80px;
-    background-color: #CCC;
+    background-color: #D8EBF9;
+    
+}
+.header .lista-menu{
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    
+
+}
+.header .lista-menu ul{
+    margin: 0 auto;
+    list-style: none;
+    text-align: center;
+        
+    
+}
+.header .lista-menu ul li{
+    display: inline;
+    
+}
+.header .lista-menu ul li a{
+    padding: 10px 10px;
+    display: inline-block;
+    text-decoration: none;
+}
+.calendario{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: ghostwhite;
+}
+.calendario tr p{
+    text-align: center;
+}
+
+.calendario tr:first-child{
+    background-color: #EBEBEB;
+}
+.calendario th:first-child, .calendario td:first-child{
+    width: 50px !important;
+}
+.calendario th, .calendario td{
+    min-width: 100px;
+}
+.calendario, th, td{
+    border: 1px solid #CCC;
+    height: 25px;
+    text-align: center;
+    
 }
 section.rodape{
     width: 100%;
     height: 200px;
-    background-color: #CCC;
-}
-div.container{
-    min-height: 600px;
-    background-color: ghostwhite;
-    padding-bottom: 20px;
+    background-color: #D8EBF9;
 }
 div.container{
     width: 90%;
+    min-height: 600px;
+    padding-bottom: 20px;
     margin: 0 auto;
 }
-
 .detalhes-hospede{
     width: 50%;
     padding-top: 20px;
@@ -64,7 +108,7 @@ div.container{
     width: 100%;
 }
 .lista-hospedes table td, th, .detalhes-hospede table td{
-    border: 1px solid #000;
+    border: 1px solid #CCC;
     text-align: left;
     padding: 5px;
 
@@ -72,11 +116,23 @@ div.container{
 .lista-hospedes table td, .detalhes-hospede table td{
     height: 30px;
 }
-.lista-hospedes table tr:nth-child(even), .detalhes-hospede table tr:nth-child(even){
+.lista-hospedes table tr:first-child, .detalhes-hospede table tr th:first-child{
     background-color: #ddd;
 }
 #spannome, #spancpf, #spanemail, #spancelular, #spantelefone{
     color: #F00;
+}
+@media screen and (max-width: 1000px){
+    .reservas-calendario{
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+    }
+    .calendario{
+        display: table-cell;
+        overflow-x: auto;
+        width: 100%; 
+    }
 }
 
 @media screen and (max-width: 800px){
@@ -91,10 +147,10 @@ div.container{
         width: 100%;
         
     }
-    .lista-hospedes h2, .detalhes-hospede h2{
+    .detalhes-hospede h2{
         text-align: center;
     }
-    .lista-hospedes h2, .detalhes-hospede h2{
+    .detalhes-hospede h2{
         margin-bottom: 20px;
         font-size: 30px;
     }

@@ -9,7 +9,22 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 </head>
 <body>
-    <section class="header"></section>
+    <section class="header">
+        <div class="lista-menu">
+            <ul>
+                <li><a href="index.php">Calendário</a></li>
+                <li><a href="lista-hospedes.php">Hospedes</a></li>
+                <li><a href="lista-hospedes.php">Reservas</a></li>
+                <li><a href="cadastrar-funcionario.php">Funcionarios</a></li>
+                <li><a href="server/logout.php">Sair</a></li>
+            
+            
+            </ul>
+            
+        </div>
+    
+    
+    </section>
     
     
     

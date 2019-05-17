@@ -19,7 +19,7 @@ require_once 'header.php';
     <a href="lista-hospedes.php">Voltar para lista</a>
     
     <div class="detalhes-hospede"> 
-        <h2>Informações do Hospede</h2>
+        <h2>Detalhes do Hospede</h2>
         
         <i id="excluirHospede" onclick="excluirHospede(<?php echo $info['id']; ?>)" class="fas fa-trash-alt"></i>
         <i id="editarHospede" onclick="editarHospede(<?php echo $info['id']; ?>)" class="fas fa-user-edit"></i>
