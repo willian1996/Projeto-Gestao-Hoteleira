@@ -5,6 +5,7 @@ if(!isset($_SESSION['idFunc'])){
 }
 require_once 'server/hospede.class.php';
 $hospede = new Hospede();
+$listaHospede = $hospede->listarHospedes();
 
 require_once 'header.php';
 ?>
@@ -20,8 +21,8 @@ require_once 'header.php';
                 
             </tr>
             <?php
-            $lista = $hospede->listarHospedes();
-            foreach($lista as $valor):
+            
+            foreach($listaHospede as $valor):
             ?>
             <tr>
                 <td><a href="detalhes-hospede.php?id=<?php echo $valor['id']; ?>"><?php echo $valor['nome_completo']; ?></a></td>

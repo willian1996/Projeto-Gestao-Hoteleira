@@ -5,7 +5,12 @@
 }
 
 a{ 
-    color: inherit; 
+    color: inherit;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
+    color: #f00;
 }
 section.header{
     width: 100%;
@@ -34,7 +39,10 @@ section.header{
 .header .lista-menu ul li a{
     padding: 10px 10px;
     display: inline-block;
-    text-decoration: none;
+    
+}
+.lista-reservas{
+    padding-top: 20px;
 }
 .calendario, .lista-reservas table, .lista-hospedes table, .detalhes-hospede table{
     width: 100%;
@@ -60,10 +68,11 @@ section.header{
     
 }
 .item-reserva{
-    background-color: #f00;
+    background-color: #E91E63;
     width: 100%;
     height: 100%;
-    border-radius: 10px;
+    border-radius: 5px;
+    color: #FFF;
 }
 
 .detalhes-hospede{

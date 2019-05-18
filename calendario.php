@@ -1,7 +1,7 @@
 <?php
 
 $data = date("Y-m-d");
-$data = new DateTime('2019-05-29');     // Pega a data de hoje
+$data = new DateTime($data);     // Pega a data de hoje
 $diaN = date( "w", strtotime($data->format('Y-m-d'))); // Dia da semana, começa em 0 com domingo, 1 para segunda...
 
 $data->modify('-' . $diaN . ' day');

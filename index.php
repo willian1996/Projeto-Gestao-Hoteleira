@@ -31,7 +31,7 @@ $listaApartamentos = $apartamentos->getApartamentos();
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
+                    <td><div class="item-reserva">Willian Sales</div></td>
                     <td></td>
                     <td></td>
                     <td></td>

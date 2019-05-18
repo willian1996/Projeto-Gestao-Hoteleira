@@ -9,6 +9,7 @@ $reservas = new Reservas();
 ?>
 
 <div class="container">
+    <a href="cadastrar-reserva.php">Nova Reserva</a>
     <div class="lista-reservas">
         <table>
             <tr>
@@ -65,14 +66,6 @@ $reservas = new Reservas();
 
 <?php
 require_once 'footer.php';
-/*
-foreach($listaReservas as $item){
-    $dataEntrada = date("d/m/y H:m", strtotime($item['data_entrada']));
-    $dataSaida = date("d/m/y H:m", strtotime($item['data_saida']));
-    echo 'Hospede '.$item['nome_completo'].' reservou o apartamento '.$item['numero'].' entrada: '.$dataEntrada.' sáida: '.$dataSaida."<hr>";
 
-
-}
-*/
 
 ?>
