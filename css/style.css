@@ -3,6 +3,7 @@
     padding: 0;
     font-family: 'Quicksand', sans-serif;
 }
+
 a{ 
     color: inherit; 
 }
@@ -35,18 +36,17 @@ section.header{
     display: inline-block;
     text-decoration: none;
 }
-.calendario{
+.calendario, .lista-reservas table, .lista-hospedes table, .detalhes-hospede table{
     width: 100%;
     border-collapse: collapse;
     background-color: ghostwhite;
+    font-family: arial, sans-serif;
 }
 .calendario tr p{
     text-align: center;
 }
 
-.calendario tr:first-child{
-    background-color: #EBEBEB;
-}
+
 .calendario th:first-child, .calendario td:first-child{
     width: 50px !important;
 }
@@ -59,17 +59,13 @@ section.header{
     text-align: center;
     
 }
-section.rodape{
+.item-reserva{
+    background-color: #f00;
     width: 100%;
-    height: 200px;
-    background-color: #D8EBF9;
+    height: 100%;
+    border-radius: 10px;
 }
-div.container{
-    width: 90%;
-    min-height: 600px;
-    padding-bottom: 20px;
-    margin: 0 auto;
-}
+
 .detalhes-hospede{
     width: 50%;
     padding-top: 20px;
@@ -102,12 +98,7 @@ div.container{
 .detalhes-hospede h2{
     margin-bottom: 15px;
 }
-.lista-hospedes table, .detalhes-hospede table{
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-.lista-hospedes table td, th, .detalhes-hospede table td{
+.lista-hospedes table td, th, .detalhes-hospede table td, .lista-reservas table td{
     border: 1px solid #CCC;
     text-align: left;
     padding: 5px;
@@ -116,11 +107,22 @@ div.container{
 .lista-hospedes table td, .detalhes-hospede table td{
     height: 30px;
 }
-.lista-hospedes table tr:first-child, .detalhes-hospede table tr th:first-child{
-    background-color: #ddd;
+.lista-hospedes table tr:first-child, .detalhes-hospede table tr th:first-child, .calendario tr:first-child, .lista-reservas table tr:first-child{
+    background-color: #EBEBEB;
 }
 #spannome, #spancpf, #spanemail, #spancelular, #spantelefone{
     color: #F00;
+}
+section.rodape{
+    width: 100%;
+    height: 200px;
+    background-color: #D8EBF9;
+}
+div.container{
+    width: 90%;
+    min-height: 600px;
+    padding: 20px 0;
+    margin: 0 auto;
 }
 @media screen and (max-width: 1000px){
     .reservas-calendario{
@@ -136,7 +138,7 @@ div.container{
 }
 
 @media screen and (max-width: 800px){
-    .lista-hospedes table .lastCol{
+    .lastCol{
         display: none;
     }
     .lista-hospedes table td, th, .detalhes-hospede table td{

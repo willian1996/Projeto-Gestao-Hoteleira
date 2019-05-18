@@ -172,6 +172,7 @@ function validarCelular(){
         botaoCadastrar.disabled = false;
     }
 }
+
 //validando celular 
 function validarTelefone(){
     if(objftelefone.value == ''){

@@ -10,12 +10,11 @@ require_once 'header.php';
 ?>
 
 <div class="container">
-    <a href="cadastrar-hospede.php">Novo Hospede</a>
+    <a href="cadastrar-hospede.php">Novo Hóspede</a>
     <div class="lista-hospedes">
         <table>
             <tr>
-                <th>ID</th>
-                <th>Nome</th>
+                <th>Nome do Hóspede</th>
                 <th>CPF</th>
                 <th class="lastCol">E-Mail</th>
                 
@@ -25,8 +24,7 @@ require_once 'header.php';
             foreach($lista as $valor):
             ?>
             <tr>
-                <td><?php echo $valor['id']; ?></td>
-                <td><a href="detalhes-hospede.php?id=<?php echo $valor['id']; ?>"><strong><?php echo $valor['nome_completo']; ?></strong></a></td>
+                <td><a href="detalhes-hospede.php?id=<?php echo $valor['id']; ?>"><?php echo $valor['nome_completo']; ?></a></td>
                 <td><?php echo $valor['CPF']; ?></td>
                 <td class="lastCol"><?php echo $valor['email']; ?></td>
             </tr>   

@@ -84,7 +84,7 @@ class Hospede extends Conexao{
     * @author WILLIAN <williansalesgabriel@hotmail.com>
     */
     public function listarHospedes(){
-        $sql = "SELECT * FROM hospedes WHERE status = 1";
+        $sql = "SELECT * FROM hospedes WHERE status = 1 order by nome_completo";
         $sql = $this->pdo->query($sql);
         
         if($sql->rowCount() > 0){
