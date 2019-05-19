@@ -12,12 +12,11 @@ $apartamento = new Apartamentos();
 $listaApartamento = $apartamento->getApartamentos();
 ?>
 <div class="container">
+    <div class="cadastrar-reserva">
     <h1>Adicionar reserva</h1>
-    
-    <form method="post">
         Hospede:
-         <select>
-             <option value="">selecione o hospede</option>
+         <select id="titular-reserva">
+             <option value="">selecione o hospede titular</option>
         <?php
             foreach($listaHospede as $hospede):
             ?>
@@ -28,16 +27,18 @@ $listaApartamento = $apartamento->getApartamentos();
         </select><br><br>
         
         Data de entrada:<br>
-        <input type="date" name="data-entrada"><br><br>
+        <input type="date" name="data-entrada" id="data-entrada"><br><br>
         Data de saída:<br>
-        <input type="date" name="data-saida"><br><br>
+        <input type="date" name="data-saida" id="data-saida"><br><br>
         Horarios:<br>
-        <select>
-            <option>check-in 14:00 | check-out 12:00</option>
+        <select id="horario-entrada">
+            <option value=""></option>
+            <option value="hora1">check-in 14:00 | check-out 12:00</option>
+            <option value="hora2">check-in 18:00 | check-out 16:00</option>
         </select><br><br>
         
         Apartamento:
-        <select>
+        <select id="apartamento">
             <option value="">selecione o apartamento</option>
         <?php
             foreach($listaApartamento as $apto):
@@ -47,11 +48,8 @@ $listaApartamento = $apartamento->getApartamentos();
             endforeach;
         ?>
         </select><br><br>
-
-
-
-
-    </form>
+        <button onclick="cadastrarReserva()">Reservar</button>
+    </div>
 
 
 

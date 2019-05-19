@@ -31,6 +31,15 @@ const senhaFuncionario = document.getElementById('senhaFunc');
 const emailLogin = document.getElementById('emailLogin');
 const senhaLogin = document.getElementById('senhaLogin');
 
+//selecionando os inputs do formulario cadastrar reserva
+const titularReserva = document.getElementById('titular-reserva');
+const dataEntrada = document.getElementById('data-entrada');
+const dataSaida = document.getElementById('data-saida');
+const horarioEntrada = document.getElementById('horario-entrada');
+const apartamento = document.getElementById('apartamento');
+
+
+
 //validando input nome no formulario form_cadastrar_hospede
 function validarNome(){
     if(objfnome.value == ''){
@@ -413,3 +422,33 @@ function logarFuncionario(){
     ajax.open('GET', 'server/logar-funcionario.php?emailFunc='+emailLogin.value+'&senhaFunc='+senhaLogin.value, true);
     ajax.send();
 }
+
+//cadastrar reserva
+function cadastrarReserva(){
+    console.log(titularReserva.value);
+    console.log(dataEntrada.value);
+    console.log(dataSaida.value);
+    console.log(horarioEntrada.value);
+    console.log(apartamento.value);
+    
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
