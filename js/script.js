@@ -1,42 +1,42 @@
 const urlHostServer = 'http://localhost/Projeto-Gestao-Hoteleira/';
 
 //selecinando os td da tabela detalhes-hospede
-const objNomeTd = document.getElementById('tdNome');
-const objCPFTd = document.getElementById('tdCPF');
-const objEmailTd = document.getElementById('tdEmail');
-const objTelefoneTd = document.getElementById('tdTelefone');
-const objCelularTd = document.getElementById('tdCelular');
+const objNomeTd = doc.querySelector('#tdNome');
+const objCPFTd = doc.querySelector('#tdCPF');
+const objEmailTd = doc.querySelector('#tdEmail');
+const objTelefoneTd = doc.querySelector('#tdTelefone');
+const objCelularTd = doc.querySelector('#tdCelular');
 
 //selecionando os input do formulario form_cadastrar_hospede
-const objfnome = document.getElementById('fnome_completo');
-const objfCPF = document.getElementById('fCPF');
-const objfemail = document.getElementById('femail');
-const objfcelular = document.getElementById('fcelular');
-const objftelefone = document.getElementById('ftelefone');
-const botaoCadastrar = document.getElementById('botaoCadastrar');
+const objfnome = doc.querySelector('#fnome_completo');
+const objfCPF = doc.querySelector('#fCPF');
+const objfemail = doc.querySelector('#femail');
+const objfcelular = doc.querySelector('#fcelular');
+const objftelefone = doc.querySelector('#ftelefone');
+const botaoCadastrar = doc.querySelector('#botaoCadastrar');
 
 //span para avisar algum erro no formulario form_cadastrar_hospede
-const spanfCPF = document.getElementById('spancpf');
-const spanfNome = document.getElementById('spannome');
-const spanfEmail = document.getElementById('spanemail');
-const spanfCelular = document.getElementById('spancelular');
-const spanfTelefone = document.getElementById('spantelefone');
+const spanfCPF = doc.querySelector('#spancpf');
+const spanfNome = doc.querySelector('#spannome');
+const spanfEmail = doc.querySelector('#spanemail');
+const spanfCelular = doc.querySelector('#spancelular');
+const spanfTelefone = doc.querySelector('#spantelefone');
 
 //selecionando os inputs formulario cadastrar funcionario
-const nomeFuncionario = document.getElementById('nomeFunc');
-const emailFuncionario = document.getElementById('emailFunc');
-const senhaFuncionario = document.getElementById('senhaFunc');
+const nomeFuncionario = doc.querySelector('#nomeFunc');
+const emailFuncionario = doc.querySelector('#emailFunc');
+const senhaFuncionario = doc.querySelector('#senhaFunc');
 
 //selecionando os inpts do formulario de login do funcionario 
-const emailLogin = document.getElementById('emailLogin');
-const senhaLogin = document.getElementById('senhaLogin');
+const emailLogin = doc.querySelector('#emailLogin');
+const senhaLogin = doc.querySelector('#senhaLogin');
 
 //selecionando os inputs do formulario cadastrar reserva
-const titularReserva = document.getElementById('titular-reserva');
-const dataEntrada = document.getElementById('data-entrada');
-const dataSaida = document.getElementById('data-saida');
-const horarioEntrada = document.getElementById('horario-entrada');
-const apartamento = document.getElementById('apartamento');
+const titularReserva = doc.querySelector('#titular-reserva');
+const dataEntrada = doc.querySelector('#data-entrada');
+const dataSaida = doc.querySelector('#data-saida');
+const horarioEntrada = doc.querySelector('#horario-entrada');
+const apartamento = doc.querySelector('#apartamento');
 
 
 
@@ -61,8 +61,8 @@ function validarNome(){
 
 //testando CPF válido
 function testaCPF(strCPF){
-    var Soma;
-    var Resto;
+    let Soma;
+    let Resto;
     Soma = 0;
     if (strCPF == "00000000000") return false;
     for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
@@ -430,6 +430,12 @@ function cadastrarReserva(){
     console.log(dataSaida.value);
     console.log(horarioEntrada.value);
     console.log(apartamento.value);
+    
+    
+    switch(horarioEntrada){
+        case:
+    }
+    
     
     
     
