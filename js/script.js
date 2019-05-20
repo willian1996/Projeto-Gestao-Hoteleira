@@ -1,42 +1,42 @@
 const urlHostServer = 'http://localhost/Projeto-Gestao-Hoteleira/';
 
 //selecinando os td da tabela detalhes-hospede
-const objNomeTd = doc.querySelector('#tdNome');
-const objCPFTd = doc.querySelector('#tdCPF');
-const objEmailTd = doc.querySelector('#tdEmail');
-const objTelefoneTd = doc.querySelector('#tdTelefone');
-const objCelularTd = doc.querySelector('#tdCelular');
+const objNomeTd = document.querySelector('#tdNome');
+const objCPFTd = document.querySelector('#tdCPF');
+const objEmailTd = document.querySelector('#tdEmail');
+const objTelefoneTd = document.querySelector('#tdTelefone');
+const objCelularTd = document.querySelector('#tdCelular');
 
 //selecionando os input do formulario form_cadastrar_hospede
-const objfnome = doc.querySelector('#fnome_completo');
-const objfCPF = doc.querySelector('#fCPF');
-const objfemail = doc.querySelector('#femail');
-const objfcelular = doc.querySelector('#fcelular');
-const objftelefone = doc.querySelector('#ftelefone');
-const botaoCadastrar = doc.querySelector('#botaoCadastrar');
+const objfnome = document.querySelector('#fnome_completo');
+const objfCPF = document.querySelector('#fCPF');
+const objfemail = document.querySelector('#femail');
+const objfcelular = document.querySelector('#fcelular');
+const objftelefone = document.querySelector('#ftelefone');
+const botaoCadastrar = document.querySelector('#botaoCadastrar');
 
 //span para avisar algum erro no formulario form_cadastrar_hospede
-const spanfCPF = doc.querySelector('#spancpf');
-const spanfNome = doc.querySelector('#spannome');
-const spanfEmail = doc.querySelector('#spanemail');
-const spanfCelular = doc.querySelector('#spancelular');
-const spanfTelefone = doc.querySelector('#spantelefone');
+const spanfCPF = document.querySelector('#spancpf');
+const spanfNome = document.querySelector('#spannome');
+const spanfEmail = document.querySelector('#spanemail');
+const spanfCelular = document.querySelector('#spancelular');
+const spanfTelefone = document.querySelector('#spantelefone');
 
 //selecionando os inputs formulario cadastrar funcionario
-const nomeFuncionario = doc.querySelector('#nomeFunc');
-const emailFuncionario = doc.querySelector('#emailFunc');
-const senhaFuncionario = doc.querySelector('#senhaFunc');
+const nomeFuncionario = document.querySelector('#nomeFunc');
+const emailFuncionario = document.querySelector('#emailFunc');
+const senhaFuncionario = document.querySelector('#senhaFunc');
 
 //selecionando os inpts do formulario de login do funcionario 
-const emailLogin = doc.querySelector('#emailLogin');
-const senhaLogin = doc.querySelector('#senhaLogin');
+const emailLogin = document.querySelector('#emailLogin');
+const senhaLogin = document.querySelector('#senhaLogin');
 
 //selecionando os inputs do formulario cadastrar reserva
-const titularReserva = doc.querySelector('#titular-reserva');
-const dataEntrada = doc.querySelector('#data-entrada');
-const dataSaida = doc.querySelector('#data-saida');
-const horarioEntrada = doc.querySelector('#horario-entrada');
-const apartamento = doc.querySelector('#apartamento');
+const titularReserva = document.querySelector('#titular-reserva');
+const dataEntrada = document.querySelector('#data-entrada');
+const dataSaida = document.querySelector('#data-saida');
+const horarioEntrada = document.querySelector('#horario-entrada');
+const apartamento = document.querySelector('#apartamento');
 
 
 
@@ -432,9 +432,9 @@ function cadastrarReserva(){
     console.log(apartamento.value);
     
     
-    switch(horarioEntrada){
-        case:
-    }
+//    switch(horarioEntrada){
+//        case:
+//    }
     
     
     
