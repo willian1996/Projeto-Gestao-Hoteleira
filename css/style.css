@@ -44,6 +44,9 @@ section.header{
 .lista-reservas{
     padding-top: 20px;
 }
+.reservas-calendario{
+    padding: 20px 0;
+}
 .calendario, .lista-reservas table, .lista-hospedes table, .detalhes-hospede table{
     width: 100%;
     border-collapse: collapse;

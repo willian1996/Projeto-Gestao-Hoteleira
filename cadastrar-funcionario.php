@@ -8,7 +8,7 @@ require_once 'header.php';
 
 
 <div class="container">
-    <a href="lista-hospedes.php">Voltar para lista</a>
+    <button><a href="javascript:history.back()">Voltar</a></button>
     <div>
         <h2>Cadastrar Funcionário</h2>
         Nome Completo:<br>

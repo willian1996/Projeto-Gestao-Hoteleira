@@ -12,6 +12,7 @@ $apartamento = new Apartamentos();
 $listaApartamento = $apartamento->getApartamentos();
 ?>
 <div class="container">
+    <button><a href="javascript:history.back()">Voltar</a></button>
     <div class="cadastrar-reserva">
     <h1>Adicionar reserva</h1>
         Hospede:
@@ -32,7 +33,6 @@ $listaApartamento = $apartamento->getApartamentos();
         <input type="date" name="data-saida" id="data-saida"><br><br>
         Horarios:<br>
         <select id="horario-entrada">
-            <option value=""></option>
             <option value="hora1">check-in 14:00 | check-out 12:00</option>
             <option value="hora2">check-in 18:00 | check-out 16:00</option>
         </select><br><br>

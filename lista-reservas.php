@@ -26,7 +26,7 @@ $reservas = new Reservas();
             ?>
             <tr>
                 <td><?php echo $valor['id'];  ?></td>
-                <td><a href="detalhes-reserva.php?id=<?php echo $valor['id']; ?>"><?php echo $valor['nome_completo']; ?></a></td>
+                <td><a href="detalhes-reserva.php?idReserv=<?php echo $valor['id']; ?>"><?php echo $valor['nome_completo']; ?></a></td>
                 <td><?php echo $valor['numero']; ?></td>
                 <td><?php echo date("d/m/y", strtotime($valor['dataCadastro'])); ?></td>
                 <td class="lastCol"><?php echo date("d/m/y H:m", strtotime($valor['data_entrada'])); ?></td>

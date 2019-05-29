@@ -16,7 +16,7 @@ require_once 'header.php';
 ?>
 
 <div class="container">
-    <a href="lista-hospedes.php">Voltar para lista</a>
+    <button><a href="javascript:history.back()">Voltar</a></button>
     
     <div class="detalhes-hospede"> 
         <h2>Detalhes do Hospede</h2>

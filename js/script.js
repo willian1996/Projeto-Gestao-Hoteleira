@@ -322,7 +322,11 @@ function editarHospede(id){
                     }
                 }
             };
-            ajax.send('id='+id+'&nome='+novoNome+'&cpf='+novoCPF+'&email='+novoEmail+'&telefone='+novoTelefone+'&celular='+novoCelular);
+            ajax.send('id='+id+'&nome='+novoNome+
+                      '&cpf='+novoCPF+
+                      '&email='+novoEmail+
+                      '&telefone='+novoTelefone+
+                      '&celular='+novoCelular);
         }else{
             alert('Alterações cancelada');
             location.reload();
@@ -390,10 +394,12 @@ function cadastrarFuncionario(){
             }
         }
     };
-    ajax.send('nomeFunc='+nomeFuncionario.value+'&emailFunc='+emailFuncionario.value+'&senhaFunc='+senhaFuncionario.value); 
+    ajax.send('nomeFunc='+nomeFuncionario.value+
+              '&emailFunc='+emailFuncionario.value+
+              '&senhaFunc='+senhaFuncionario.value); 
 }
 
-//login funcionario 
+//login funcionario  
 function logarFuncionario(){
     if(emailLogin.value == ''){
         alert('Digite seu email!');
@@ -419,26 +425,64 @@ function logarFuncionario(){
             } 
         }
     };
-    ajax.open('GET', 'server/logar-funcionario.php?emailFunc='+emailLogin.value+'&senhaFunc='+senhaLogin.value, true);
+    ajax.open('GET', 'server/logar-funcionario.php?emailFunc='+emailLogin.value+
+              '&senhaFunc='+senhaLogin.value, true);
     ajax.send();
 }
 
 //cadastrar reserva
 function cadastrarReserva(){
-    console.log(titularReserva.value);
-    console.log(dataEntrada.value);
-    console.log(dataSaida.value);
-    console.log(horarioEntrada.value);
-    console.log(apartamento.value);
+    let horaEntrada;
+    let horaSaida;
+    switch(horarioEntrada.value){
+        case 'hora1':
+            horaEntrada = '14:00:00';
+            horaSaida = '12:00:00';
+            break;
+        case 'hora2':
+            horaEntrada = '18:00:00';
+            horaSaida = '16:00:00';
+            break;
+        default:
+            horaEntrada = '';
+            horaSaida = '';
+    }
+    
+    if(titularReserva.value == '' || dataEntrada.value == '' 
+       || dataSaida.value == '' || apartamento.value == ''
+       || horaEntrada == '' || horaSaida == ''){
+        alert("Selecione todos os campos");
+        return false;
+    }
+    let hospede = titularReserva.value;
+    let checkin = dataEntrada.value + ' ' + horaEntrada;
+    let checkout = dataSaida.value + ' ' + horaSaida;
+    let apto = apartamento.value;
     
     
-//    switch(horarioEntrada){
-//        case:
-//    }
-    
-    
-    
-    
+    if(window.XMLHttpRequest){
+        var ajax = new XMLHttpRequest();
+    }else{
+        var ajax = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    ajax.open('POST', 'server/cadastrar-reserva-submit.php', true);
+    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    ajax.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            var resposta = JSON.parse(this.response);
+            if(resposta.deucerto){
+                console.log(resposta);
+                window.location.href = urlHostServer+'detalhes-reserva.php?idReserv='+resposta.idReserv;
+            }else{
+                alert(resposta.mensagem);
+            } 
+        }
+    };
+    ajax.send('hospede='+hospede+
+              '&checkin='+checkin+
+              '&checkout='+checkout+
+              '&apto='+apto
+             ); 
 }
 
 

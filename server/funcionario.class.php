@@ -28,7 +28,7 @@ class Funcionario extends Conexao{
             $sql->bindValue(":email", $this->email);
             $sql->bindValue(":senha", $this->senha);
             $sql->bindValue(":dataCadastro", $this->dataCadastro);
-            $sql->execute();
+            $sql->execute(); 
             
             if($sql->rowCount() > 0){
                 $retorno['deucerto'] = true;

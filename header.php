@@ -14,16 +14,10 @@
             <ul>
                 <li><a href="index.php">Calendário</a></li>
                 <li><a href="lista-hospedes.php">Hospedes</a></li>
-                <li><a href="lista-reservas.php">Reservas</a></li>
                 <li><a href="cadastrar-funcionario.php">Funcionarios</a></li>
                 <li><a href="server/logout.php">Sair</a></li>
-            
-            
             </ul>
-            
         </div>
-    
-    
     </section>
     
     
