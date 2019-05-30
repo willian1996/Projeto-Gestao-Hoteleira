@@ -9,26 +9,6 @@ class Reservas extends Conexao{
     private $funcionario;
     private $dataCadastro;
 
-    
-    public function getReservas(){
-        $array = array();
-        
-        $sql = "SELECT hospedes.id, hospedes.nome_completo, apartamentos.numero, reservas.*, funcionarios.nome 
-        FROM hospedes
-        JOIN reservas 
-        ON hospedes.id = reservas.id_hospede
-        JOIN apartamentos 
-        ON apartamentos.id = reservas.id_apartamento
-        JOIN funcionarios 
-        ON funcionarios.id = hospedes.id_funcionario";
-        $sql = $this->pdo->query($sql);
-        
-        if($sql->rowCount() > 0){
-            $array = $sql->fetchAll();
-        }
-        return $array;
-    }
-
     public function addReserva($dados){
         $this->hospede = $this->filtraEntrada($dados['hospede']);
         $this->checkin = $this->filtraEntrada($dados['checkin']);
@@ -66,6 +46,44 @@ class Reservas extends Conexao{
         }
 
 
+    }
+    
+    public function getReservas(){
+        $array = array();
+        
+        $sql = "SELECT hospedes.id, hospedes.nome_completo, apartamentos.numero, reservas.*, funcionarios.nome 
+        FROM hospedes
+        JOIN reservas 
+        ON hospedes.id = reservas.id_hospede
+        JOIN apartamentos 
+        ON apartamentos.id = reservas.id_apartamento
+        JOIN funcionarios 
+        ON funcionarios.id = hospedes.id_funcionario";
+        $sql = $this->pdo->query($sql);
+        
+        if($sql->rowCount() > 0){
+            $array = $sql->fetchAll();
+        }
+        return $array;
+    }
+    
+    public function getReservasDaSemana(){
+        $array = array();
+        
+        $sql = "SELECT hospedes.id, hospedes.nome_completo, apartamentos.numero, reservas.*, funcionarios.nome 
+        FROM hospedes
+        JOIN reservas 
+        ON hospedes.id = reservas.id_hospede
+        JOIN apartamentos 
+        ON apartamentos.id = reservas.id_apartamento
+        JOIN funcionarios 
+        ON funcionarios.id = hospedes.id_funcionario";
+        $sql = $this->pdo->query($sql);
+        
+        if($sql->rowCount() > 0){
+            $array = $sql->fetchAll();
+        }
+        return $array;
     }
     
     

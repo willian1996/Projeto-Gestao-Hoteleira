@@ -322,11 +322,13 @@ function editarHospede(id){
                     }
                 }
             };
-            ajax.send('id='+id+'&nome='+novoNome+
-                      '&cpf='+novoCPF+
-                      '&email='+novoEmail+
-                      '&telefone='+novoTelefone+
-                      '&celular='+novoCelular);
+            ajax.send(
+                'id='+id+'&nome='+novoNome+
+                '&cpf='+novoCPF+
+                '&email='+novoEmail+
+                '&telefone='+novoTelefone+
+                '&celular='+novoCelular
+            );
         }else{
             alert('Alterações cancelada');
             location.reload();
@@ -394,9 +396,11 @@ function cadastrarFuncionario(){
             }
         }
     };
-    ajax.send('nomeFunc='+nomeFuncionario.value+
-              '&emailFunc='+emailFuncionario.value+
-              '&senhaFunc='+senhaFuncionario.value); 
+    ajax.send(
+        'nomeFunc='+nomeFuncionario.value+  
+        '&emailFunc='+emailFuncionario.value+
+        '&senhaFunc='+senhaFuncionario.value    
+    ); 
 }
 
 //login funcionario  
@@ -448,9 +452,12 @@ function cadastrarReserva(){
             horaSaida = '';
     }
     
-    if(titularReserva.value == '' || dataEntrada.value == '' 
-       || dataSaida.value == '' || apartamento.value == ''
-       || horaEntrada == '' || horaSaida == ''){
+    if(titularReserva.value == '' 
+       || dataEntrada.value == '' 
+       || dataSaida.value == '' 
+       || apartamento.value == ''
+       || horaEntrada == '' 
+       || horaSaida == ''){
         alert("Selecione todos os campos");
         return false;
     }
@@ -478,11 +485,12 @@ function cadastrarReserva(){
             } 
         }
     };
-    ajax.send('hospede='+hospede+
-              '&checkin='+checkin+
-              '&checkout='+checkout+
-              '&apto='+apto
-             ); 
+    ajax.send(
+        'hospede='+hospede+
+        '&checkin='+checkin+
+        '&checkout='+checkout+
+        '&apto='+apto
+    ); 
 }
 
 
