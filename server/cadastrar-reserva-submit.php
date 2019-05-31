@@ -1,8 +1,8 @@
 <?php
 session_start();
-//if(empty($_POST['hospede'])){
-//    header("Location: ../index.php");
-//}
+if(empty($_POST['hospede'])){
+   header("Location: ../index.php");
+}
 
 //puxando o arquivo classe reservas
 require_once 'reservas.class.php';

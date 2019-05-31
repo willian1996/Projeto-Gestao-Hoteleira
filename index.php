@@ -52,7 +52,7 @@ for($i=0;$i<=7;$i++) {
                 </tr>
             <?php
             endforeach;
-    
+            
             
             ?>
             
@@ -61,6 +61,7 @@ for($i=0;$i<=7;$i++) {
 
         </table>
     </div>
+    
     
 
 
